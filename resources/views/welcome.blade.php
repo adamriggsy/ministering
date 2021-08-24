@@ -10,8 +10,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.css"/>
+
         
         <script
           src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -19,7 +20,7 @@
           crossorigin="anonymous">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.js"></script>
 
         <!-- Styles -->
         <style>
@@ -49,7 +50,7 @@
                 justify-content: flex-start;
             }
 
-            #activeHousehold > * {
+            #activeHousehold > div {
                 margin-right: 50px;
             }
 
@@ -80,10 +81,54 @@
             #activeHousehold .removeAssigned {
                 margin-left: 5px;
             }
+
+            #activeClose {
+                position: absolute;
+                top: 0;
+                right: 0;
+                cursor: pointer;
+            }
+
+            .bi-x-circle {
+                cursor: pointer;
+            }
+
+            @media (max-width:767px) {
+                #activeHousehold {
+                    flex-wrap: wrap;
+                }
+
+                #activeHousehold > div {
+                    width: 100%;
+                    margin-right: 0;
+                    margin-bottom: 10px;
+                }
+
+                #activeHousehold #householdInfo {
+                    order: 1;
+                    display: flex;
+                    align-items: baseline;
+                }
+
+                #activeHousehold #householdInfo > * {
+                    margin-right: 10px;
+                }
+
+                #activeHousehold #assignHouseholdContainer {
+                    order: 2;
+                    margin-bottom: 20px;
+                    margin-top: -10px;
+                }
+
+                #activeHousehold #ministeringInfo {
+                    order: 3;
+                }
+            }
         </style>
     </head>
     <body class="antialiased">
         <div id="activeHousehold" class="relative flex items-top d-none">
+            <i id="activeClose" class="bi-x-circle small"></i>
             <div id='householdInfo'>
                 <h2 class='householdName'></h2>
                 <p class='husbandName'></p>
@@ -106,24 +151,26 @@
         </div>
         <hr>
         <div id="households" class="relative flex items-top justify-center">
-            <table id="allHouseholdsTable" class="table"> 
-                <thead>
-                    <tr>
-                        <td>Family</td>
-                        <td>Brother</td>
-                        <td>Sister</td>
-                        <td>Sister Assigned</td>
-                        <td>Brother Assigned</td>
-                        <td>Ministering To</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($households as $household)
-                        @include('includes.household', ['household' => $household])
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="table-responsive-md">
+                <table id="allHouseholdsTable" class="table"> 
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Family</th>
+                            <th data-priority="2">Brother</th>
+                            <th>Sister</th>
+                            <th>Sister Assigned</th>
+                            <th>Brother Assigned</th>
+                            <th>Ministering To</th>
+                            <th data-priority="3"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($households as $household)
+                            @include('includes.household', ['household' => $household])
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <script src="{{asset('js/autocomplete.js')}}"></script>

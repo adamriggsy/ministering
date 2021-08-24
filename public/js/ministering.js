@@ -249,6 +249,9 @@ var ministeringHelper = function () {
 
     $(document).on('click touch', '.assignHousehold', function() {
     	functions.workOnHousehold($(this).closest(css.household.container));
+    	$([document.documentElement, document.body]).animate({
+	        scrollTop: $(css.activeHousehold.container).offset().top
+	    }, 1000);
     });
 
     $(document).on('click touch', '.removeVisiting', function() {
@@ -257,6 +260,10 @@ var ministeringHelper = function () {
 
     $(document).on('click touch', '.removeAssigned', function() {
     	functions.removeAssignedMinTo($(this).closest('.minToHouse'));
+    });
+
+    $(document).on('click touch', '#activeClose', function() {
+    	$(css.activeHousehold.container).addClass('d-none');
     });
 
     return {
