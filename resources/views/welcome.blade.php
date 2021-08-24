@@ -30,6 +30,7 @@
             body {
                 font-family: 'Nunito', sans-serif;
                 padding: 20px;
+                background-color: #f7fafc;
             }
 
             #households {
@@ -81,7 +82,7 @@
             }
         </style>
     </head>
-    <body class="antialiased bg-gray-100 dark:bg-gray-900">
+    <body class="antialiased">
         <div id="activeHousehold" class="relative flex items-top d-none">
             <div id='householdInfo'>
                 <h2 class='householdName'></h2>
