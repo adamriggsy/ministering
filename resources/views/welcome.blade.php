@@ -127,6 +127,7 @@
         </style>
     </head>
     <body class="antialiased">
+        
         <div id="activeHousehold" class="relative flex items-top d-none">
             <i id="activeClose" class="bi-x-circle small"></i>
             <div id='householdInfo'>

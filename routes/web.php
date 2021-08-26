@@ -17,7 +17,7 @@ use App\Models\Households;
 
 Route::get('/', function () {
 	return view('welcome')->with('households', Households::all());
-});
+})->name('ward-list');
 
 Route::get('/upload-list', function () {
     return view('upload-list');
@@ -42,3 +42,9 @@ Route::get('/api/households/unassigned', function () {
     }
     return response()->json($return);
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
