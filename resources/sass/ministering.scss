@@ -1,0 +1,97 @@
+#households {
+    flex-wrap: wrap;
+
+    .household {
+        width: 100%;
+
+        .individual {
+            margin-left: 20px;
+        }
+    }
+}
+
+
+#activeHousehold {
+    justify-content: flex-start;
+
+    & > div {
+        margin-right: 50px;
+    }
+}
+
+#allHouseholdsTable {
+    tr.community .color {
+        background-color: #5325be;
+        width: 3px;
+        color: #fff;
+    }
+
+    tr.approval .color {
+        background-color: #25be32;
+        width: 3px;
+        color: #000;
+    }
+
+    tr.single-man .color {
+        background-color: #5c7dca;
+        width: 3px;
+        color: #fff;
+    }
+
+    tr.single-woman .color {
+        background-color: #Ca5cca;
+        width: 3px;
+        color: #000;
+    }
+}
+
+#assignHouseholdContainer {
+    flex-grow: 3;
+
+    .removeAssigned {
+        margin-left: 5px;
+    }
+}
+
+#activeClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.bi-x-circle {
+    cursor: pointer;
+}
+
+@media (max-width:767px) {
+    #activeHousehold {
+        flex-wrap: wrap;
+
+        & > div {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+
+        #householdInfo {
+            order: 1;
+            display: flex;
+            align-items: baseline;
+        }
+
+        #householdInfo > * {
+            margin-right: 10px;
+        }
+
+        #assignHouseholdContainer {
+            order: 2;
+            margin-bottom: 20px;
+            margin-top: -10px;
+        }
+
+        #ministeringInfo {
+            order: 3;
+        }
+    }
+}

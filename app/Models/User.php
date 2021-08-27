@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -41,4 +42,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin() {
+       return $this->role === 'admin';
+    }
+
+    public function isBishopric() {
+       return $this->role === 'manager';
+    }
+
+    public function isManager() {
+       return $this->role === 'manager';
+    }
+
+    public function isUser() {
+       return $this->role === 'user';
+    }
+
+    public function getCanManageAttribute() {
+        return $this->isAdmin() || $this->isBishopric() || $this->isManager();
+    }
+
+    public function getCanApproveAttribute() {
+        return $this->isAdmin() || $this->isBishopric();
+    }
 }

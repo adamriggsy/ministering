@@ -1,0 +1,82 @@
+#households {
+  flex-wrap: wrap;
+}
+#households .household {
+  width: 100%;
+}
+#households .household .individual {
+  margin-left: 20px;
+}
+
+#activeHousehold {
+  justify-content: flex-start;
+}
+#activeHousehold > div {
+  margin-right: 50px;
+}
+
+#allHouseholdsTable tr.community .color {
+  background-color: #5325be;
+  width: 3px;
+  color: #fff;
+}
+#allHouseholdsTable tr.approval .color {
+  background-color: #25be32;
+  width: 3px;
+  color: #000;
+}
+#allHouseholdsTable tr.single-man .color {
+  background-color: #5c7dca;
+  width: 3px;
+  color: #fff;
+}
+#allHouseholdsTable tr.single-woman .color {
+  background-color: #Ca5cca;
+  width: 3px;
+  color: #000;
+}
+
+#assignHouseholdContainer {
+  flex-grow: 3;
+}
+#assignHouseholdContainer .removeAssigned {
+  margin-left: 5px;
+}
+
+#activeClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.bi-x-circle {
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  #activeHousehold {
+    flex-wrap: wrap;
+  }
+  #activeHousehold > div {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  #activeHousehold #householdInfo {
+    order: 1;
+    display: flex;
+    align-items: baseline;
+  }
+  #activeHousehold #householdInfo > * {
+    margin-right: 10px;
+  }
+  #activeHousehold #assignHouseholdContainer {
+    order: 2;
+    margin-bottom: 20px;
+    margin-top: -10px;
+  }
+  #activeHousehold #ministeringInfo {
+    order: 3;
+  }
+}

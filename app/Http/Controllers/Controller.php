@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Http\DataUploader;
 use App\Models\Households;
+use Auth;
 
 class Controller extends BaseController
 {
@@ -17,6 +18,12 @@ class Controller extends BaseController
     public function handleUpload(Request $request) {
     	$uploader = new DataUploader($request);
     	return $uploader->handleUploadedFile();
+    }
+
+    public function wardList(Request $request) {
+    	return view('welcome')
+    		->with('user', Auth::user())
+    		->with('households', Households::take(30)->get());
     }
 
     public function assign(Request $request) {

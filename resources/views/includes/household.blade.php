@@ -1,4 +1,5 @@
 <tr class='household {{$household->status}}' data-householdid='{{$household->id}}'>
+    <td class='color'></td>
     <td class='hh_lastName'>{{ $household->last_name }}</td>
     <td class='hh_husbandName'>{{ $household->husband()->name ?? '' }}</td>
     <td class='hh_wifeName'>{{ $household->wife()->name ?? '' }}</td>
@@ -9,5 +10,12 @@
 			<p class="ministerTo" data-householdid="{{ $ministerTo->id }}">{{ $ministerTo->householdName }}</p>
 		@endforeach
     </td>
-    <td><button class='assignHousehold btn btn-outline-dark btn-light'>Manage</button></td>
+    
+    <td>
+        @if($user->canManage)
+            <button class='assignHousehold btn btn-outline-dark btn-light'>Manage</button>
+        @else
+            &nbsp;
+        @endif
+    </td>
 </tr>

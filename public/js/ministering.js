@@ -225,10 +225,12 @@ var ministeringHelper = function () {
 
 			$("#allHouseholdsTable").DataTable({
                 paging: false,
+                "order": [],
+                "autoWidth": false,
                 "columnDefs": [
                     {
-                        "targets": 3,
-                        "orderable": false
+                        "targets": 0,
+                        "orderable": false,
                     },
                     {
                         "targets": 4,
@@ -240,6 +242,10 @@ var ministeringHelper = function () {
                     },
                     {
                         "targets": 6,
+                        "orderable": false
+                    },
+                    {
+                        "targets": 7,
                         "orderable": false
                     },
                 ]
