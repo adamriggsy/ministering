@@ -5,7 +5,8 @@ var ministeringHelper = function () {
     	'households' : null,
     	'unassignedHouseholds': false,
     	'activeHousehold': null,
-    	'ac': false
+    	'ac': false,
+    	'commentTemplate': null
     };
 
     var css = {
@@ -26,6 +27,17 @@ var ministeringHelper = function () {
     			},
     			'visiting' : {
     				'container' : '#visitingHousehold'
+    			}
+    		},
+    		'comments' : {
+    			'container' : '#householdComments',
+    			'allComments' : '#commentsContainer',
+    			'view' : '#view',
+    			'form' : '#newComment',
+    			'formError' : '#commentError',
+    			'nav' : {
+    				'view' : '#commentNavView',
+    				'create' : '#commentNavCreate'
     			}
     		}
     	},
@@ -90,6 +102,8 @@ var ministeringHelper = function () {
     		}
 
     		$(css.activeHousehold.container).removeClass('d-none');
+
+    		functions.getHouseholdComments();
     	},
     	'setAutocomplete' : function() {
 			$("#assignHouseholdContainer").html('').append('<input type="text" class="form-control" id="assignHousehold" placeholder="Start typing..." autocomplete="off">');
@@ -250,6 +264,61 @@ var ministeringHelper = function () {
                     },
                 ]
             });
+    	}, 
+    	'getHouseholdComments' : function() {
+    		$.getJSON('/api/household/' + data.activeHousehold.id + '/comments', function( comments ) {
+				
+				functions.buildComments(comments);
+				functions.hideCommentsAjaxLoader();
+			});
+    	},
+    	'createComment' : function() {
+    		const form = $(css.activeHousehold.comments.form);
+
+    		let activeHousehold = functions.getDataAttr('activeHousehold');
+
+
+    		$.ajax({
+                url: '/api/household/' + activeHousehold.id + '/comments/create',
+                type: 'post',
+                data: {
+                	form: JSON.stringify(form.serializeArray().reduce(function(m,o){  m[o.name] = o.value; return m;}, {}))
+                },
+                success: function(response) {
+                    if(response.saved) {
+                    	$(css.activeHousehold.comments.nav.view).find('.nav-link').click();
+                    	functions.buildComments(response.comments);
+                    	functions.resetCommentForm();
+                    } else {
+                    	functions.setCommentError('Could not save your comment. Refresh the page and try again.');
+                    }
+                }
+            });
+    	},
+    	'buildComments' : function(comments) {
+    		$(css.activeHousehold.comments.allComments).html('');
+    		functions.showCommentsAjaxLoader();
+
+    		$.each(comments, function(index, comment) {
+				let authorInfo = comment.author.name + ' - ' + _moment(comment.updated_at).format('YYYY-MM-DD LT');
+				let newComment = data.commentTemplate(comment.id, comment.body, authorInfo);
+				console.log(comment);
+				$(css.activeHousehold.comments.allComments).append(newComment);
+			});
+
+			functions.hideCommentsAjaxLoader();
+    	},
+    	'setCommentError' : function(error) {
+    		$(css.activeHousehold.comments.formError).html(error);
+    	},
+    	'resetCommentForm' : function() {
+    		$(css.activeHousehold.comments.form)[0].reset();
+    	},
+    	'showCommentsAjaxLoader' : function() {
+    		$(css.activeHousehold.comments.view).find('.ajax-loader').removeClass('d-none');
+    	},
+    	'hideCommentsAjaxLoader' : function() {
+    		$(css.activeHousehold.comments.view).find('.ajax-loader').addClass('d-none');
     	}
     }
 
@@ -270,6 +339,15 @@ var ministeringHelper = function () {
 
     $(document).on('click touch', '#activeClose', function() {
     	$(css.activeHousehold.container).addClass('d-none');
+    });
+
+	$(document).on('click touch', '#commentSubmit', function(e) {
+		e.preventDefault();
+		functions.createComment();
+    });   
+
+    $(document).on('click touch', '#commentNavCreate', function() {
+    	functions.setCommentError('');
     });
 
     return {

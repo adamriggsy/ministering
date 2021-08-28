@@ -19,6 +19,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/households/unassigned', function () {
-    dd(Households::doesntHave('ministeredBy')->get());
-});

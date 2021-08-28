@@ -1,4 +1,5 @@
-<x-guest-layout>
+@extends('layouts.guest')
+@section('content')
     <div class="px-5 py-5 p-lg-0 bg-surface-secondary">
         <div class="d-flex justify-content-center">
             <div class="col-12 d-flex flex-column justify-content-center py-lg-16 px-lg-20 position-relative">
@@ -63,4 +64,4 @@
             </div>
         </div>
     </div>
-</x-guest-layout>
+@endsection

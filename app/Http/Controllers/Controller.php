@@ -78,4 +78,22 @@ class Controller extends BaseController
 
     	return response()->json(['success' => true, 'household' => $household, 'otherHousehold' => Households::find($data['assignedId'])]);
     }
+
+    public function getHouseholdComments(Households $household) {
+    	return response()->json($household->comments()->with('author')->get());
+    }
+
+    public function createHouseholdComment(Request $request, Households $household) {
+		
+		$data = json_decode($request->get('form'));
+		$newComment = $household->comments()->create([
+		    'user_id' => Auth::id(),
+		    'body' => htmlspecialchars(strip_tags($data->comment))
+		]);
+
+    	return response()->json([
+    		'comments' => $household->comments()->with('author')->get(),
+    		'saved' => $newComment
+    	]);
+    }
 }

@@ -25,10 +25,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/upload-list/submit', ['uses' => 'App\Http\Controllers\Controller@handleUpload']);
 
 	Route::get('/dashboard', function () {
-	    //    $household->comments()->create([
-		//     'user_id' => Auth::id(),
-		//     'body' => "Test Comment to see this in action"
-		// ]);
 	    return view('dashboard');
 	})->middleware(['auth'])->name('dashboard');
 
@@ -49,6 +45,10 @@ Route::middleware(['auth'])->group(function () {
 	    }
 	    return response()->json($return);
 	});
+
+	Route::get('/api/household/{household}/comments', ['uses' => 'App\Http\Controllers\Controller@getHouseholdComments']);
+
+	Route::post('/api/household/{household}/comments/create', ['uses' => 'App\Http\Controllers\Controller@createHouseholdComment']);
 
 });
 

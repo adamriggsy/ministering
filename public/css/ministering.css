@@ -9,10 +9,42 @@
 }
 
 #activeHousehold {
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 2fr 3fr 6fr 7fr;
+  grid-gap: 50px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #000;
 }
-#activeHousehold > div {
-  margin-right: 50px;
+#activeHousehold #assignedToVisitContainer .removeAssigned {
+  margin-left: 10px;
+}
+#activeHousehold #ministeringInfo .removeVisiting {
+  font-size: 14px;
+}
+#activeHousehold #householdComments .nav-tabs .nav-item {
+  text-align: center;
+  margin-right: 0;
+  margin-left: 0;
+}
+#activeHousehold #householdComments .nav-tabs .nav-item .nav-link {
+  width: 100%;
+  padding: 0.5rem;
+}
+#activeHousehold #householdComments .nav-tabs .nav-item .nav-link.active {
+  background-color: #666;
+  color: #fff;
+}
+#activeHousehold #householdComments #view #commentsContainer {
+  height: 150px;
+  overflow: auto;
+}
+#activeHousehold #householdComments #view #commentsContainer .houseComment {
+  margin-bottom: 10px;
+}
+#activeHousehold #householdComments #view #commentsContainer .houseComment author {
+  font-size: 12px;
+  font-style: italic;
 }
 
 #allHouseholdsTable tr.community .color {
@@ -56,7 +88,8 @@
 
 @media (max-width: 767px) {
   #activeHousehold {
-    flex-wrap: wrap;
+    grid-template-columns: 100%;
+    grid-gap: 5px;
   }
   #activeHousehold > div {
     width: 100%;
@@ -73,10 +106,13 @@
   }
   #activeHousehold #assignHouseholdContainer {
     order: 2;
-    margin-bottom: 20px;
-    margin-top: -10px;
+    margin-bottom: 0;
+    margin-top: 0;
   }
   #activeHousehold #ministeringInfo {
     order: 3;
+  }
+  #activeHousehold #householdComments {
+    order: 4;
   }
 }
