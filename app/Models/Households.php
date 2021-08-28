@@ -79,4 +79,14 @@ class Households extends Model
     public function getHouseholdNameAttribute() {
     	return $this->last_name . ', ' . $this->head()->name;
     }
+
+    /**
+     * Relationship: comments
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comments::class, 'commentable');
+    }
 }

@@ -66,4 +66,14 @@ class User extends Authenticatable
     public function getCanApproveAttribute() {
         return $this->isAdmin() || $this->isBishopric();
     }
+
+    /**
+     * Relationship: comments
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

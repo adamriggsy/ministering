@@ -1,73 +1,75 @@
 @extends('layouts.app')
+@section('page_title') Ministering Assignor @endsection
+@section('page_styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <link href="{{ asset('css/ministering.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.css"/>
+@endsection
 
 @section('content')
-{{-- <title>L2 Ward Ministering Assignments</title> --}}
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
-<link href="{{ asset('css/ministering.css') }}" rel="stylesheet">
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.js"></script>
-
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div id="activeHousehold" class="relative flex items-top d-none">
-            <i id="activeClose" class="bi-x-circle small"></i>
-            <div id='householdInfo'>
-                <h2 class='householdName'></h2>
-                <p class='husbandName'></p>
-                <p class='wifeName'></p>
-            </div>
-            <div id='ministeringInfo'>
-                <h3>Assigned to Visit</h3>
-                <div id='assignedToVisitContainer'>
-
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div id="activeHousehold" class="relative d-flex items-top d-none">
+                <i id="activeClose" class="bi-x-circle small"></i>
+                <div id='householdInfo'>
+                    <h2 class='householdName'></h2>
+                    <p class='husbandName'></p>
+                    <p class='wifeName'></p>
                 </div>
-                <hr>
-                <h3>Assigned Ministers <i class="removeVisiting bi-x-circle fs-6 text-danger"></i></h3>
-                <div id='visitingHousehold'>
+                <div id='ministeringInfo'>
+                    <h3>Assigned to Visit</h3>
+                    <div id='assignedToVisitContainer'>
 
+                    </div>
+                    <hr>
+                    <h3>Assigned Ministers <i class="removeVisiting bi-x-circle fs-6 text-danger"></i></h3>
+                    <div id='visitingHousehold'>
+
+                    </div>
+                </div>
+                <div id="assignHouseholdContainer">
+                    
                 </div>
             </div>
-            <div id="assignHouseholdContainer">
-                
+            
+            <div id="households" class="relative d-flex items-top justify-center">
+                <div class="table-responsive-md">
+                    <table id="allHouseholdsTable" class="table"> 
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th data-priority="1">Family</th>
+                                <th data-priority="2">Brother</th>
+                                <th>Sister</th>
+                                <th>Sister Assigned</th>
+                                <th>Brother Assigned</th>
+                                <th>Ministering To</th>
+                                <th data-priority="3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($households as $household)
+                                @include('includes.household', ['household' => $household])
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <hr>
-        <div id="households" class="relative flex items-top justify-center">
-            <div class="table-responsive-md">
-                <table id="allHouseholdsTable" class="table"> 
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th data-priority="1">Family</th>
-                            <th data-priority="2">Brother</th>
-                            <th>Sister</th>
-                            <th>Sister Assigned</th>
-                            <th>Brother Assigned</th>
-                            <th>Ministering To</th>
-                            <th data-priority="3"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($households as $household)
-                            @include('includes.household', ['household' => $household])
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <script src="{{asset('js/autocomplete.js')}}"></script>
-        <script src="{{asset('js/ministering.js')}}"></script>
-        <script>
-            $(function(){
-                ministeringHelper.functions.init({!! $households->toJson() !!});
-
-                ministeringHelper.functions.resetDataTable();
-            });
-        </script>
     </div>
-</div>
+@endsection
+
+@section('page_scripts')
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.js"></script>
+    <script src="{{asset('js/autocomplete.js')}}"></script>
+    <script src="{{asset('js/ministering.js')}}"></script>
+    <script>
+        $(function(){
+            ministeringHelper.functions.init({!! $households->toJson() !!});
+
+            ministeringHelper.functions.resetDataTable();
+        });
+    </script>
 @endsection
