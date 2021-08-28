@@ -1,3 +1,5 @@
+// From: https://github.com/gch1p/bootstrap-5-autocomplete
+
 const DEFAULTS = {
   treshold: 2,
   maximumItems: 5,

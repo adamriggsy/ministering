@@ -13,19 +13,27 @@
 
 #activeHousehold {
     display: grid;
-    grid-template-columns: 2fr 3fr 6fr 7fr;
+    grid-template-columns: 1fr 2fr 5fr;
     grid-gap: 50px;
     padding-bottom: 20px;
     margin-bottom: 30px;
     border-bottom: 1px solid #000;
 
     #assignedToVisitContainer {
+        .minToHouse {
+            margin-bottom: 5px;
+        }
+
         .removeAssigned {
             margin-left: 10px;
         }
     }
 
     #ministeringInfo {
+        h3 {
+            margin-bottom: 10px;
+        }
+
         .removeVisiting {
             font-size: 14px;
         }
@@ -51,6 +59,8 @@
         }
 
         #view {
+            padding-top: 10px;
+            
             #commentsContainer {
                 height: 150px;
                 overflow: auto;
@@ -95,7 +105,8 @@
 }
 
 #assignHouseholdContainer {
-    flex-grow: 3;
+    width: 100%;
+    margin: 10px 0 5px;
 
     .removeAssigned {
         margin-left: 5px;
@@ -135,17 +146,16 @@
         }
 
         #assignHouseholdContainer {
-            order: 2;
             margin-bottom: 0;
             margin-top: 0;
         }
 
         #ministeringInfo {
-            order: 3;
+            order: 2;
         }
 
         #householdComments {
-            order: 4;
+            order: 3;
         }
     }
 }

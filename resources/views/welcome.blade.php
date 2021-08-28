@@ -20,18 +20,15 @@
                 </div>
                 <div id='ministeringInfo'>
                     <h3>Assigned to Visit</h3>
-                    <div id='assignedToVisitContainer'>
-
-                    </div>
+                    <div id='assignedToVisitContainer'></div>
+                    <div id="assignHouseholdContainer"></div>
+                    
                     <hr>
+                    
                     <h3>Assigned Ministers <i class="removeVisiting bi-x-circle fs-6 text-danger"></i></h3>
                     <div id='visitingHousehold'>
 
                     </div>
-                    <hr>
-                </div>
-                <div id="assignHouseholdContainer">
-                    
                 </div>
                 <div id="householdComments">
                     <h3>Comments</h3>
@@ -65,7 +62,7 @@
             
             <div id="households" class="relative d-flex items-top justify-center">
                 <div class="table-responsive-md" style="width:100%;">
-                    <table id="allHouseholdsTable" class="table"> 
+                    <table id="allHouseholdsTable" class="table table-striped"> 
                         <thead>
                             <tr>
                                 <th></th>

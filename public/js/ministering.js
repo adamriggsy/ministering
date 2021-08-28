@@ -115,6 +115,7 @@ var ministeringHelper = function () {
 		        data: ministeringHelper.functions.getDataAttr('unassignedHouseholds'),
 		        maximumItems: 10,
 		        treshold: 1,
+		        highlightTyped: false,
 		        onSelectItem: ({label, value}) => {
 		            functions.assignHousehold(value);
 		        }
@@ -148,7 +149,6 @@ var ministeringHelper = function () {
                     assignedId: assignedId
                 },
                 success: function(response) {
-                    console.log(response);
                     functions.updateHouseholds(response.household);
                     functions.updateHouseholds(response.assignedHousehold);
 
@@ -302,7 +302,6 @@ var ministeringHelper = function () {
     		$.each(comments, function(index, comment) {
 				let authorInfo = comment.author.name + ' - ' + _moment(comment.updated_at).format('YYYY-MM-DD LT');
 				let newComment = data.commentTemplate(comment.id, comment.body, authorInfo);
-				console.log(comment);
 				$(css.activeHousehold.comments.allComments).append(newComment);
 			});
 
