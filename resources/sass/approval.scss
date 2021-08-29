@@ -8,69 +8,191 @@ h1 {
 	margin-bottom: 20px;
 }
 
-.household {
-	border-bottom: 1px solid $grey;
-	padding-bottom: 10px;
-	margin-bottom: 10px;
+#viewChoiceContainer {
+	position: absolute;
+    top: 10px;
+    right: 10px;
+    display: block;
+    width: fit-content;
 
-	.householdName {
-		margin-bottom: 0;
-	}
+    ul {
+    	li {
+    		&:hover {
+    			cursor: pointer;
+    			background-color: $grey;
+    			color:$black;
+    		}
+    	}
+    }
+}
 
-	.status {
-		margin-top: 0;
-		margin-bottom: 10px;
-		text-transform: capitalize;
-	}
+#assignmentContainer {
+	&.ajr-grid {
+		display: flex;
+		flex-flow: wrap;
+		justify-content: flex-start;
 
-	&.proposed {
-		.resetStatus {
-			display: none;
+		.household {
+			border-bottom: 1px solid $grey;
+			padding-bottom: 10px;
+			margin-bottom: 30px;
+			width: 31%;
+			margin-right: 2%;
+			text-align: center;
+
+			.householdName {
+				margin-bottom: 0;
+			}
+
+			.status {
+				margin-top: 0;
+				margin-bottom: 10px;
+				text-transform: capitalize;
+			}
+
+			&.proposed {
+				.resetStatus {
+					display: none;
+				}
+			}
+
+			&.approved {
+				.householdName, .status {
+					color:$green;
+				}
+
+				.acceptAssignment {
+					display: none;
+				}
+			}
+
+			&.rejected {
+				.householdName, .status {
+					color:$red;
+				}
+
+				.rejectAssignment {
+					display: none;
+				}
+			}
+
+			.assignedContainer {
+				margin-bottom: 10px;
+
+				p {
+					margin-bottom: 5px;
+				}
+			}
+
+			.approvalBtns {
+				margin-bottom: 10px;
+			}
+
+			.allComments {
+				margin: 10px auto 10px;
+				max-height: 250px;
+				overflow: auto;
+				width: 90%;
+				// text-align: left;
+				@include overflowShadows($black);
+
+				// h3 {
+				// 	text-align: center;
+				// }
+
+				.ministeringComment {
+					@include comment;
+				}
+
+			}
 		}
 	}
 
-	&.approved {
-		.householdName, .status {
-			color:$green;
+	&.ajr-list {
+		display: flex;
+		flex-flow: wrap;
+		justify-content: flex-start;
+
+		.household {
+			border-bottom: 1px solid $grey;
+			padding-bottom: 10px;
+			margin-bottom: 30px;
+			width: 100%;
+			display: flex;
+
+			.householdName {
+				margin-bottom: 0;
+			}
+
+			.status {
+				margin-top: 0;
+				margin-bottom: 10px;
+				text-transform: capitalize;
+			}
+
+			&.proposed {
+				.resetStatus {
+					display: none;
+				}
+			}
+
+			&.approved {
+				.householdName, .status {
+					color:$green;
+				}
+
+				.acceptAssignment {
+					display: none;
+				}
+			}
+
+			&.rejected {
+				.householdName, .status {
+					color:$red;
+				}
+
+				.rejectAssignment {
+					display: none;
+				}
+			}
+
+			.assignedContainer {
+				margin-bottom: 10px;
+
+				p {
+					margin-bottom: 5px;
+				}
+			}
+
+			.approvalBtns {
+				margin-bottom: 10px;
+			}
+
+			.infoContainer {
+				width: 51%;
+				margin-right: 2%;
+				display: flex;
+				justify-content: space-between;
+
+				.assignedApprovalContainer {
+					padding-top: 40px;
+				}
+			}
+
+			.allComments {
+				padding-top: 40px;
+				margin: 0 0 10px;
+				max-height: 250px;
+				overflow: auto;
+				width: fit-content;
+				max-width: 47%;
+				@include overflowShadows($black);
+
+				.ministeringComment {
+					@include comment;
+				}
+
+			}
 		}
-
-		.acceptAssignment {
-			display: none;
-		}
-	}
-
-	&.rejected {
-		.householdName, .status {
-			color:$red;
-		}
-
-		.rejectAssignment {
-			display: none;
-		}
-	}
-
-	.assignedContainer {
-		margin-bottom: 10px;
-
-		p {
-			margin-bottom: 5px;
-		}
-	}
-
-	.approvalBtns {
-		margin-bottom: 10px;
-	}
-
-	.allComments {
-		margin-bottom: 10px;
-		max-height: 250px;
-		overflow: auto;
-		width: fit-content;
-		@include overflowShadows($black);
-
-		.ministeringComment {
-			@include comment;
-		}
-
 	}
 }

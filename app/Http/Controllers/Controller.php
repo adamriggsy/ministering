@@ -30,7 +30,7 @@ class Controller extends BaseController
     }
 
     public function approveAssignments(Request $request) {
-    	$assignments = MinisterTo::all();
+    	$assignments = MinisterTo::all()->load('household')->sortBy('household.last_name');
     	$combined = [];
 
     	foreach($assignments as $assignment) {

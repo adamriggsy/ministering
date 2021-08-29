@@ -7,6 +7,10 @@ body {
 	font-family: var(--x-font-sans-serif);
 }
 
+a {
+	color: $black;
+}
+
 .ajax-loader {
 	.lds-default {
 		display: inline-block;

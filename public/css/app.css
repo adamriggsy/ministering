@@ -65938,6 +65938,10 @@ body {
   font-family: var(--x-font-sans-serif);
 }
 
+a {
+  color: #000;
+}
+
 .ajax-loader .lds-default {
   display: inline-block;
   position: relative;

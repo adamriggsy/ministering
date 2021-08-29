@@ -6,6 +6,11 @@ var approvalHelper = function () {
     };
 
     var css = {
+        'mainContainer': '#assignmentContainer',
+        'viewTypes': {
+            'grid': 'ajr-grid',
+            'list': 'ajr-list'
+        },
         'modals': {
             'comment': '#commentModal'
         },
@@ -83,46 +88,6 @@ var approvalHelper = function () {
     	'resetCommentForm' : function() {
     		$(css.comments.form)[0].reset();
     	},
-        // 'acceptAssignment' : function(btn) {
-        //     let container = btn.closest(css.household.container);
-        //     let ministerId = container.data('ministerid');
-        //     let householdId = container.data('householdid');
-
-        //     $.ajax({
-        //         url: '/api/minister-to/household/' + householdId + '/accept',
-        //         type: 'post',
-        //         data: {},
-        //         success: function(response) {
-        //             if(response.saved) {
-        //                 $(css.household.status, container).html(response.status),
-        //                 $(css.household.container, container).attr('class', 'household ' + response.status);
-        //                 functions.handleBtnGroup(container);
-        //             } else {
-        //                 functions.setStatusError('Could not update the status. Refresh the page and try again.');
-        //             }
-        //         }
-        //     });
-        // },
-        // 'rejectAssignment' : function(btn) {
-        //     let container = btn.closest(css.household.container);
-        //     let ministerId = container.data('ministerid');
-        //     let householdId = container.data('householdid');
-
-        //     $.ajax({
-        //         url: '/api/minister-to/household/' + householdId + '/reject',
-        //         type: 'post',
-        //         data: {},
-        //         success: function(response) {
-        //             if(response.saved) {
-        //                 $(css.household.status, container).html(response.status),
-        //                 $(css.household.container, container).attr('class', 'household ' + response.status);
-        //                 functions.handleBtnGroup(container);
-        //             } else {
-        //                 functions.setStatusError('Could not update the status. Refresh the page and try again.');
-        //             }
-        //         }
-        //     });
-        // },
         'updateStatus' : function(btn, status) {
             let container = btn.closest(css.household.container);
             let ministerId = container.data('ministerid');
@@ -158,12 +123,23 @@ var approvalHelper = function () {
                 .not(':hidden')
                 .last()
                 .addClass('fake-last');
-                
+
             $('.btn-group', container)
                 .find('button')
                 .not(':hidden')
                 .first()
                 .addClass('fake-first');
+        },
+        'changeViewType' : function(viewType) {
+            switch(viewType) {
+                case 'grid':
+                    $(css.mainContainer).removeClass(css.viewTypes.list).addClass(css.viewTypes.grid);
+                    break;
+                case 'list':
+                default:
+                    $(css.mainContainer).addClass(css.viewTypes.list).removeClass(css.viewTypes.grid);
+                    break;
+            }
         }
     };
 
@@ -183,6 +159,10 @@ var approvalHelper = function () {
     $(document).on('click touch', '.resetStatus', function(e) {
         functions.updateStatus($(this), 'propose');
     });
+
+    $(document).on('click touch', '#viewChoice li', function() {
+        functions.changeViewType($(this).data('viewtype'));
+    })
 
     return {
         data : functions.getAllData,
