@@ -242,45 +242,43 @@ var ministeringHelper = function () {
                 "order": [],
                 // "autoWidth": false,
                 "columns": [
-                    "columnDefs": [
-                        {
-                            "targets": 0,
-                            "orderable": false,
-                            "width": '1%'
-                        },
-                        {
-                            "targets": 1,
-                            "width": '5%'
-                        },
-                        {
-                            "targets": 2,
-                            "width": '5%'
-                        },
-                        {
-                            "targets": 3,
-                            "width": '5%'
-                        },
-                        {
-                            "targets": 4,
-                            "orderable": false,
-                            "width": '14%'
-                        },
-                        {
-                            "targets": 5,
-                            "orderable": false,
-                            "width": '14%'
-                        },
-                        {
-                            "targets": 6,
-                            "orderable": false,
-                            "width": '14%'
-                        },
-                        {
-                            "targets": 7,
-                            "orderable": false,
-                            "width": '14%'
-                        },
-                    ]
+                    {
+                        "targets": 0,
+                        "orderable": false,
+                        "width": '1%'
+                    },
+                    {
+                        "targets": 1,
+                        "width": '5%'
+                    },
+                    {
+                        "targets": 2,
+                        "width": '5%'
+                    },
+                    {
+                        "targets": 3,
+                        "width": '5%'
+                    },
+                    {
+                        "targets": 4,
+                        "orderable": false,
+                        "width": '14%'
+                    },
+                    {
+                        "targets": 5,
+                        "orderable": false,
+                        "width": '14%'
+                    },
+                    {
+                        "targets": 6,
+                        "orderable": false,
+                        "width": '14%'
+                    },
+                    {
+                        "targets": 7,
+                        "orderable": false,
+                        "width": '14%'
+                    },
                 ]
             });
     	}, 
