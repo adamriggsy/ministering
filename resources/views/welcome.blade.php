@@ -3,9 +3,10 @@
 @section('page_styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <link href="{{ mix('css/ministering.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.css"/> --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap5.min.css"/>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.css"/>
+    <link href="{{ mix('css/ministering.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -53,8 +54,8 @@
             </div>
             
             <div id="households" class="relative d-flex items-top justify-center">
-                <div class="table-responsive-md" style="width:100%;">
-                    <table id="allHouseholdsTable" class="table table-striped"> 
+                {{-- <div class="table-responsive" > --}}
+                    <table id="allHouseholdsTable" class="table table-sm table-striped" style="width:100%;"> 
                         <thead>
                             <tr>
                                 <th></th>
@@ -73,7 +74,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
     </div>
@@ -81,6 +82,8 @@
 
 @section('page_scripts')
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap5.min.js"></script>
+
     <script src="{{asset('js/autocomplete.js')}}"></script>
     <script src="{{asset('js/ministering.js')}}"></script>
     <script>
