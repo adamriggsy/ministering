@@ -3,7 +3,7 @@
 @section('page_styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <link href="{{ asset('css/ministering.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/ministering.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/r-2.2.9/datatables.min.css"/>
 @endsection
