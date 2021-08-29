@@ -25,6 +25,7 @@ class Households extends Model
 		'husbandName',
 		'wifeName',
 		'householdName',
+        'fullHouseholdName',
 		'status'
 	];
 
@@ -78,6 +79,20 @@ class Households extends Model
 
     public function getHouseholdNameAttribute() {
     	return $this->last_name . ', ' . $this->head()->name;
+    }
+
+    public function getFullHouseholdNameAttribute() {
+        $fullName = $this->last_name . ', ';
+
+        if(!is_null($this->husbandName)) {
+            $fullName .= $this->husbandName . ' & ';
+        }
+
+        if(!is_null($this->wifeName)) {
+            $fullName .= $this->wifeName ?? '';
+        }
+        
+        return $fullName;
     }
 
     /**

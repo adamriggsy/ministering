@@ -1,3 +1,7 @@
+@import '_overflow-shadows.scss';
+@import '_comment.scss';
+@import '_variables.scss';
+
 #households {
     flex-wrap: wrap;
 
@@ -64,14 +68,10 @@
             #commentsContainer {
                 height: 150px;
                 overflow: auto;
+                @include overflowShadows($black);
 
                 .houseComment {
-                    margin-bottom: 10px;
-
-                    author {
-                        font-size: 12px;
-                        font-style: italic;
-                    }
+                    @include comment;
                 }
             }
         }

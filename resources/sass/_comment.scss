@@ -1,0 +1,8 @@
+@mixin comment {
+	margin-bottom: 10px;
+
+	author {
+	    font-size: 12px;
+	    font-style: italic;
+	}
+}

@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Http\DataUploader;
 use App\Models\Households;
+use App\Models\MinisterTo;
 use Auth;
 
 class Controller extends BaseController
@@ -24,6 +25,19 @@ class Controller extends BaseController
     	return view('welcome')
     		->with('user', Auth::user())
     		->with('households', Households::take(10)->get());
+    }
+
+    public function approveAssignments(Request $request) {
+    	$assignments = MinisterTo::all();
+    	$combined = [];
+
+    	foreach($assignments as $assignment) {
+    		$combined[$assignment->household_id]['assignment'] = $assignment;
+    		$combined[$assignment->household_id]['individuals'][] = $assignment->individual;
+    	}
+
+    	return view('approveAssignments')
+    		->with('assignments', $combined);
     }
 
     public function assign(Request $request) {
@@ -84,7 +98,6 @@ class Controller extends BaseController
     }
 
     public function createHouseholdComment(Request $request, Households $household) {
-		
 		$data = json_decode($request->get('form'));
 		$newComment = $household->comments()->create([
 		    'user_id' => Auth::id(),
@@ -95,5 +108,18 @@ class Controller extends BaseController
     		'comments' => $household->comments()->with('author')->get(),
     		'saved' => $newComment
     	]);
+    }
+
+    public function createMinisterToComment(Request $request, MinisterTo $ministerTo) {
+		$data = json_decode($request->get('form'));
+		$newComment = $ministerTo->comments()->create([
+		    'user_id' => Auth::id(),
+		    'body' => htmlspecialchars(strip_tags($data->comment))
+		]);
+
+		return response()->json([
+			'comments' => $ministerTo->comments()->with('author')->get()->sortByDesc('created_at'),
+			'saved' => $newComment
+		]);
     }
 }

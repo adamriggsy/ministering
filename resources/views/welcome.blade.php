@@ -43,18 +43,10 @@
                     <div class="tab-content" id="commentContent">
                         <div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="view-tab">
                             @include('includes.utilities.ajax-loader', ['classes' => 'small dark'])
-                            <div id="commentsContainer" class="overflowShadows"></div>
+                            <div id="commentsContainer"></div>
                         </div>
                         <div class="tab-pane fade" id="create" role="tabpanel" aria-labelledby="create-tab">
-                            <form id="newComment" class="ajax-form">
-                                <div id="commentError" class="text-danger"></div>
-                                <div class="form-floating mt-4 mb-3">
-                                    <textarea class="form-control" id="comment" name="comment" style="height: 100px" placeholder="Leave a comment"></textarea>
-                                    <label for="comment">Comment</label>
-                                </div>
-
-                                <button id="commentSubmit" type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            @include('includes.forms.comment', ['showSubmit' => true])
                         </div>
                     </div>
                 </div>
@@ -103,7 +95,7 @@
                         <author>${author}</author>
                         <p class="commentBody">${body}</p>
                     </div>
-                `
+                `;
             };
 
             ministeringHelper.functions.setDataAttr('commentTemplate', commentTemplate);

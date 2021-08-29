@@ -1,0 +1,43 @@
+@import '_overflow-shadows.scss';
+@import '_comment.scss';
+@import '_variables.scss';
+
+h1 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.household {
+	border-bottom: 1px solid $grey;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+
+	.householdName {
+		margin-bottom: 10px;
+	}
+
+	.assignedContainer {
+		margin-bottom: 10px;
+
+		p {
+			margin-bottom: 5px;
+		}
+	}
+
+	.approvalBtns {
+		margin-bottom: 10px;
+	}
+
+	.allComments {
+		margin-bottom: 10px;
+		max-height: 250px;
+		overflow: auto;
+		width: fit-content;
+		@include overflowShadows($black);
+
+		.ministeringComment {
+			@include comment;
+		}
+
+	}
+}

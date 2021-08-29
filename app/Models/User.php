@@ -48,7 +48,7 @@ class User extends Authenticatable
     }
 
     public function isBishopric() {
-       return $this->role === 'manager';
+       return $this->role === 'bishopric';
     }
 
     public function isManager() {

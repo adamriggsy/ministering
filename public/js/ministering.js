@@ -50,7 +50,7 @@ var ministeringHelper = function () {
     		'minBro' : '.hh_ministeringBro',
     		'minTo' : '.hh_ministeringTo'
     	}
-    }
+    };
 
     var functions = {
     	'init' : function(households) {
@@ -319,7 +319,7 @@ var ministeringHelper = function () {
     	'hideCommentsAjaxLoader' : function() {
     		$(css.activeHousehold.comments.view).find('.ajax-loader').addClass('d-none');
     	}
-    }
+    };
 
     $(document).on('click touch', '.assignHousehold', function() {
     	functions.workOnHousehold($(this).closest(css.household.container));

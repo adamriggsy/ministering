@@ -17,6 +17,7 @@ use App\Models\Households;
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/', ['uses' => 'App\Http\Controllers\Controller@wardList'])->name('ward-list');
+	Route::get('/approve-assignments', ['uses' => 'App\Http\Controllers\Controller@approveAssignments'])->name('approve-assignments');
 
 	Route::get('/upload-list', function () {
 	    return view('upload-list');
@@ -25,6 +26,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/upload-list/submit', ['uses' => 'App\Http\Controllers\Controller@handleUpload']);
 
 	Route::get('/dashboard', function () {
+	    if(!Auth::user()->canManage) {
+	    	return redirect()->to('/');
+	    }
 	    return view('dashboard');
 	})->middleware(['auth'])->name('dashboard');
 
@@ -49,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/api/household/{household}/comments', ['uses' => 'App\Http\Controllers\Controller@getHouseholdComments']);
 
 	Route::post('/api/household/{household}/comments/create', ['uses' => 'App\Http\Controllers\Controller@createHouseholdComment']);
+	Route::post('/api/minister-to/{ministerTo}/comments/create', ['uses' => 'App\Http\Controllers\Controller@createMinisterToComment']);
 
 });
 
