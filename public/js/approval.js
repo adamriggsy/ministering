@@ -15,7 +15,9 @@ var approvalHelper = function () {
         },
         'household': {
             'container': '.household',
-            'comments': '.allComments'
+            'comments': '.allComments',
+            'status': '.status',
+            'error': '.statusError'
         }
     };
 
@@ -26,6 +28,10 @@ var approvalHelper = function () {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    }
 			});
+
+            $('.household').each(function() {
+                functions.handleBtnGroup($(this));
+            });
     	},
     	'setDataAttr' : function(attr, val) {
     		data[attr] = val;
@@ -36,6 +42,9 @@ var approvalHelper = function () {
     	'getAllData' : function() {
     		return data;
     	},
+        'getActiveContainerById' : function(ministerId) {
+            return $('[data-ministerid="' + ministerId + '"] ' + css.household.comments);
+        },
     	'createComment' : function() {
     		const form = $(css.comments.form);
             const ministerId = form.find('#ministerId').val();
@@ -58,7 +67,7 @@ var approvalHelper = function () {
             });
     	},
     	'buildComments' : function(comments, ministerId) {
-    		let container = $('[data-ministerid="' + ministerId + '"] ' + css.household.comments);
+    		let container = functions.getActiveContainerById(ministerId);
 
             container.html('');
     		
@@ -73,14 +82,107 @@ var approvalHelper = function () {
     	},
     	'resetCommentForm' : function() {
     		$(css.comments.form)[0].reset();
-    	}
+    	},
+        // 'acceptAssignment' : function(btn) {
+        //     let container = btn.closest(css.household.container);
+        //     let ministerId = container.data('ministerid');
+        //     let householdId = container.data('householdid');
+
+        //     $.ajax({
+        //         url: '/api/minister-to/household/' + householdId + '/accept',
+        //         type: 'post',
+        //         data: {},
+        //         success: function(response) {
+        //             if(response.saved) {
+        //                 $(css.household.status, container).html(response.status),
+        //                 $(css.household.container, container).attr('class', 'household ' + response.status);
+        //                 functions.handleBtnGroup(container);
+        //             } else {
+        //                 functions.setStatusError('Could not update the status. Refresh the page and try again.');
+        //             }
+        //         }
+        //     });
+        // },
+        // 'rejectAssignment' : function(btn) {
+        //     let container = btn.closest(css.household.container);
+        //     let ministerId = container.data('ministerid');
+        //     let householdId = container.data('householdid');
+
+        //     $.ajax({
+        //         url: '/api/minister-to/household/' + householdId + '/reject',
+        //         type: 'post',
+        //         data: {},
+        //         success: function(response) {
+        //             if(response.saved) {
+        //                 $(css.household.status, container).html(response.status),
+        //                 $(css.household.container, container).attr('class', 'household ' + response.status);
+        //                 functions.handleBtnGroup(container);
+        //             } else {
+        //                 functions.setStatusError('Could not update the status. Refresh the page and try again.');
+        //             }
+        //         }
+        //     });
+        // },
+        'updateStatus' : function(btn, status) {
+            let container = btn.closest(css.household.container);
+            let ministerId = container.data('ministerid');
+            let householdId = container.data('householdid');
+
+            $.ajax({
+                url: '/api/minister-to/household/' + householdId + '/' + status,
+                type: 'post',
+                data: {},
+                success: function(response) {
+                    if(response.saved) {
+                        $(css.household.status, container).html(response.status),
+                        console.log($(css.household.container, container));
+                        $(container).removeClass().addClass('household ' + response.status);
+                        functions.handleBtnGroup(container);
+                    } else {
+                        functions.setStatusError('Could not update the status. Refresh the page and try again.');
+                    }
+                }
+            });
+        },
+        'setStatusError' : function(error) {
+            $(css.household.error).html(error);
+        },
+        'handleBtnGroup' : function(container) {
+            $('.btn-group', container)
+                .find('button')
+                .removeClass('fake-last')
+                .removeClass('fake-first');
+
+            $('.btn-group', container)
+                .find('button')
+                .not(':hidden')
+                .last()
+                .addClass('fake-last');
+                
+            $('.btn-group', container)
+                .find('button')
+                .not(':hidden')
+                .first()
+                .addClass('fake-first');
+        }
     };
 
 	$(document).on('click touch', '#submitComment', function(e) {
 		e.preventDefault();
-        console.log('submitComment clicked');
 		functions.createComment();
     });   
+
+    $(document).on('click touch', '.acceptAssignment', function(e) {
+        functions.updateStatus($(this), 'accept');
+    });
+
+    $(document).on('click touch', '.rejectAssignment', function(e) {
+        functions.updateStatus($(this), 'reject');
+    });
+
+    $(document).on('click touch', '.resetStatus', function(e) {
+        functions.updateStatus($(this), 'propose');
+    });
 
     return {
         data : functions.getAllData,

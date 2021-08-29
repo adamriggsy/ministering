@@ -12,8 +12,14 @@
             <h1>Assignments to be approved</h1>
             @foreach ($assignments as $key => $ag) 
             {{-- @dump($ag['assignment']) --}}
-                <div class='household' data-ministerid='{{ $ag['assignment']->id }}'>
+                <div 
+                    class='household {{ $ag['assignment']->status }}' 
+                    data-ministerid='{{ $ag['assignment']->id }}'
+                    data-householdid='{{ $ag['assignment']->household_id }}'
+                >
                     <h2 class="householdName">{{ $ag['assignment']->household->fullHouseholdName }}</h2>
+                    <h4 class="status">{{ ucfirst($ag['assignment']->status) }}</h4>
+                    
                     <div class="assignedContainer">
                         @foreach($ag['individuals'] as $individual)
                             @if(!is_null($individual))
@@ -21,16 +27,20 @@
                             @endif
                         @endforeach
                     </div>
+                    
+                    <div class="statusError text-danger"></div>
+
                     <div class="approvalBtns btn-group btn-group-sm" role="group" aria-label="">
-                        <button id="acceptAssignment" type="button" class="btn btn-success">Accept</button>
-                        <button id="rejectAssignment" type="button" class="btn btn-danger">Reject</button>
-                        <button id="feedback" type="button" class="btn btn-secondary" data-bs-target="#commentModal" data-bs-toggle="modal">Feedback</button>
+                        <button type="button" class="btn btn-primary resetStatus">Reset Status</button>
+                        <button type="button" class="btn btn-success acceptAssignment">Accept</button>
+                        <button type="button" class="btn btn-danger rejectAssignment">Reject</button>
+                        <button type="button" class="btn btn-secondary feedback" data-bs-target="#commentModal" data-bs-toggle="modal">Feedback</button>
                     </div>
                     <div class='allComments'>
                         @foreach($ag['assignment']->comments->sortByDesc('created_at') as $comment)
                             <div class='ministeringComment' data-commentid="{{ $comment->id }}">
                                 <author>
-                                    {{ $comment->author->name }} - {{ $comment->updated_at->format('Y-m-d h:i A')}}
+                                    {{ $comment->author->name }} - {{ $comment->updated_at->timezone(Session::get('user_timezone', 'America/Denver'))->format('Y-m-d h:i A')}}
                                 </author>
                                 <p class="commentBody">{{ $comment->body }}</p>
                             </div>

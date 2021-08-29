@@ -7,9 +7,11 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\DataUploader;
 use App\Models\Households;
 use App\Models\MinisterTo;
+use App\Enums\MinisterToStatus;
 use Auth;
 
 class Controller extends BaseController
@@ -45,7 +47,7 @@ class Controller extends BaseController
 
     	$household = Households::find($data['householdId']);
 
-    	if(!is_null($household->husband())) {
+    	if($household->husband()->exists) {
 	    	$existingHusbandMT = $household->husband()->ministerTo->pluck('id')->toArray();
 
 	    	$wantedHusbandMT = in_array($data['assignedId'], $existingHusbandMT);
@@ -55,7 +57,7 @@ class Controller extends BaseController
 	    	}
 	    }
 
-    	if(!is_null($household->wife())) {
+    	if($household->wife()->exists) {
 	    	$existingWifeMT = $household->wife()->ministerTo->pluck('id')->toArray();
 	    	$wantedWifeMT = in_array($data['assignedId'], $existingWifeMT);
 
@@ -82,11 +84,11 @@ class Controller extends BaseController
 
     	$household = Households::find($data['householdId']);
     	
-    	if(!is_null($household->husband())) {
+    	if($household->husband()->exists) {
     		$household->husband()->ministerTo()->detach($data['assignedId']);
 	    }
 
-    	if(!is_null($household->wife())) {
+    	if($household->wife()->exists) {
 			$household->wife()->ministerTo()->detach($data['assignedId']);
 	    }
 
@@ -120,6 +122,54 @@ class Controller extends BaseController
 		return response()->json([
 			'comments' => $ministerTo->comments()->with('author')->get()->sortByDesc('created_at'),
 			'saved' => $newComment
+		]);
+    }
+
+    public function ministerToAccept(Request $request, int $id) {
+		$assignments = MinisterTo::where('household_id', '=', $id)->get();
+
+		DB::transaction(function () use($assignments) {
+			foreach($assignments as $assignment) {
+	    		$assignment->status = MinisterToStatus::ASSIGNMENT_APPROVED;
+	    		$assignment->save();
+	    	}
+	    });
+	
+    	return response()->json([
+			'saved' => true,
+			'status' => MinisterToStatus::ASSIGNMENT_APPROVED
+		]);
+    }
+
+    public function ministerToReject(Request $request, int $id) {
+		$assignments = MinisterTo::where('household_id', '=', $id)->get();
+
+		DB::transaction(function () use($assignments) {
+			foreach($assignments as $assignment) {
+	    		$assignment->status = MinisterToStatus::ASSIGNMENT_REJECTED;
+	    		$assignment->save();
+	    	}
+	    });
+	
+    	return response()->json([
+			'saved' => true,
+			'status' => MinisterToStatus::ASSIGNMENT_REJECTED
+		]);
+    }
+
+    public function ministerToPropose(Request $request, int $id) {
+		$assignments = MinisterTo::where('household_id', '=', $id)->get();
+
+		DB::transaction(function () use($assignments) {
+			foreach($assignments as $assignment) {
+	    		$assignment->status = MinisterToStatus::ASSIGNMENT_PROPOSED;
+	    		$assignment->save();
+	    	}
+	    });
+	
+    	return response()->json([
+			'saved' => true,
+			'status' => MinisterToStatus::ASSIGNMENT_PROPOSED
 		]);
     }
 }

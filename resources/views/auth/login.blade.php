@@ -12,6 +12,7 @@
                         </div>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
+                            <input type="hidden" name="timezone" id="timezone" value="">
                             <div class="mb-5">
                                 <label class="form-label" for="email">{{ __('E-Mail Address') }}</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -64,4 +65,16 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('page_scripts')
+    <script>
+        $(document).ready(function(){
+            $('#timezone').val(_moment.tz.guess());
+
+            // console.log(_moment);
+            // console.log(_moment.tz('America/Los_Angeles'));
+            // console.log(_moment.tz.guess());
+        });
+    </script>
 @endsection

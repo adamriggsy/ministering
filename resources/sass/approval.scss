@@ -1,6 +1,7 @@
 @import '_overflow-shadows.scss';
 @import '_comment.scss';
 @import '_variables.scss';
+@import '_btn-group.scss';
 
 h1 {
 	text-align: center;
@@ -13,7 +14,39 @@ h1 {
 	margin-bottom: 10px;
 
 	.householdName {
+		margin-bottom: 0;
+	}
+
+	.status {
+		margin-top: 0;
 		margin-bottom: 10px;
+		text-transform: capitalize;
+	}
+
+	&.proposed {
+		.resetStatus {
+			display: none;
+		}
+	}
+
+	&.approved {
+		.householdName, .status {
+			color:$green;
+		}
+
+		.acceptAssignment {
+			display: none;
+		}
+	}
+
+	&.rejected {
+		.householdName, .status {
+			color:$red;
+		}
+
+		.rejectAssignment {
+			display: none;
+		}
 	}
 
 	.assignedContainer {

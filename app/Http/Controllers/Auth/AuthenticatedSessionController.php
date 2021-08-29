@@ -28,6 +28,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        if($request->has('timezone')) {
+            $request->session()->put('user_timezone', $request->get('timezone'));
+        }
+
         $request->authenticate();
 
         $request->session()->regenerate();

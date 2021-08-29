@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
 	    if(!Auth::user()->canManage) {
 	    	return redirect()->to('/');
 	    }
+
 	    return view('dashboard');
 	})->middleware(['auth'])->name('dashboard');
 
@@ -54,6 +55,9 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::post('/api/household/{household}/comments/create', ['uses' => 'App\Http\Controllers\Controller@createHouseholdComment']);
 	Route::post('/api/minister-to/{ministerTo}/comments/create', ['uses' => 'App\Http\Controllers\Controller@createMinisterToComment']);
+	Route::post('/api/minister-to/household/{id}/accept', ['uses' => 'App\Http\Controllers\Controller@ministerToAccept']);
+	Route::post('/api/minister-to/household/{id}/propose', ['uses' => 'App\Http\Controllers\Controller@ministerToPropose']);
+	Route::post('/api/minister-to/household/{id}/reject', ['uses' => 'App\Http\Controllers\Controller@ministerToReject']);
 
 });
 
