@@ -24,9 +24,16 @@ class Controller extends BaseController
     }
 
     public function wardList(Request $request) {
+    	$appEnv = env('APP_ENV', 'prod');
+    	if($appEnv === 'prod' || $appEnv === 'production') {
+    		$households = Households::get();
+    	} else {
+    		$households = Households::take(20)->get();
+    	}
+
     	return view('welcome')
     		->with('user', Auth::user())
-    		->with('households', Households::get());
+    		->with('households', $households);
     }
 
     public function approveAssignments(Request $request) {

@@ -54,7 +54,7 @@
             </div>
             
             <div id="households" class="relative d-flex items-top justify-center">
-                {{-- <div class="table-responsive" > --}}
+                <div class="table-responsive" >
                     <table id="allHouseholdsTable" class="table table-sm table-striped" style="width:100%;"> 
                         <thead>
                             <tr>
@@ -74,7 +74,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                {{-- </div> --}}
+                </div>
             </div>
         </div>
     </div>
