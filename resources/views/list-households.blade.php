@@ -77,6 +77,10 @@
             }).appendTo(form);
         });
 
+        $(document).on('shown.bs.modal', '#commentModal', function(e) {
+        	$(this).find('#comment').focus();
+        });
+
         $(document).on('show.bs.modal', '#householdModal', function(e) {
         	householdsHelper.functions.populateHouseholdModal($(e.relatedTarget));
         });

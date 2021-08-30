@@ -22,7 +22,8 @@ window.householdsHelper = function () {
             'formError': '#commentError'
         },
         'household': {
-            'container': '.household'
+            'container': '.household',
+            'comments': '.allComments'
         }
     };
 
@@ -63,6 +64,7 @@ window.householdsHelper = function () {
     	'createComment' : function() {
     		const form = $(css.comments.form);
             const householdId = form.find('#householdId').val();
+            
             functions.setDataAttr('currentHouseholdId', householdId);
             let params = {
                 'url' : '/api/household/' + householdId + '/comments/create',
@@ -98,9 +100,6 @@ window.householdsHelper = function () {
             let modal = $(css.modals.household.container);
             functions.setDataAttr('currentHouseholdId');
             
-            console.log(modal);
-            console.log(modal.find('.householdName'));
-            console.log($(css.modals.household.comments, modal));
             modal.find('.householdName').text(houseData.fullHouseholdName);
 
             commentsHelper.functions.buildComments(
