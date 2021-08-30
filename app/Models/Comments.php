@@ -13,6 +13,8 @@ class Comments extends Model
      */
     protected $fillable = ['user_id', 'body'];
 
+    protected $appends = ['authorInfo'];
+
     /**
      * Relationship: author
      *
@@ -21,6 +23,10 @@ class Comments extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getAuthorInfoAttribute() {
+        return $this->author()->first();
     }
 
     /**

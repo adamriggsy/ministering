@@ -64,7 +64,13 @@ export const commentsHelper = function () {
                 container.html('<p>' + emptyMessage + '</p>');
             }else {
     		    $.each(comments, function(index, comment) {
-    				let authorInfo = comment.author.name + ' - ' + _moment(comment.updated_at).format('YYYY-MM-DD LT');
+                    let author = comment.author;
+
+                    if(typeof author === 'undefined') {
+                        author = comment.authorInfo;
+                    }
+                    
+    				let authorInfo = author.name + ' - ' + _moment(comment.updated_at).format('YYYY-MM-DD LT');
     				let newComment = data.commentTemplate(comment.id, comment.body, authorInfo);
     				container.prepend(newComment);
     			});

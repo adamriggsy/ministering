@@ -16,7 +16,8 @@ class HouseholdController extends BaseController
 
     public function allHouseholds() {
         return view('list-households')
-            ->with('households', Households::getHouseholds()->sortBy('last_name'));
+            ->with('commentMax', 3)
+            ->with('households', Households::getHouseholds());
     }
 
     public function unassigned() {

@@ -33,9 +33,9 @@ class Households extends Model
         $appEnv = env('APP_ENV', 'prod');
 
         if($appEnv === 'prod' || $appEnv === 'production') {
-            $households = Households::get();
+            $households = Households::orderBy('last_name')->get();
         } else {
-            $households = Households::take(20)->get();
+            $households = Households::orderBy('last_name')->take(20)->get();
         }
 
         return $households;
@@ -102,6 +102,8 @@ class Households extends Model
 
         if(!is_null($this->wifeName)) {
             $fullName .= $this->wifeName ?? '';
+        } else {
+            $fullName = str_replace(" &", "", $fullName);
         }
         
         return $fullName;

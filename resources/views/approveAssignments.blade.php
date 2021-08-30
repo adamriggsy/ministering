@@ -74,33 +74,8 @@
         </div>
     </div>
 
-    <div id="commentModal" class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Comment on Assignment</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="info d-flex justify-content-start">
-                        <div class="household me-10">
-                            <h4>Household:</h4>
-                            <div class="householdName"></div>
-                        </div>
-                        <div class="assigned">
-                            <h4>Assigned:</h4>
-                            <div class="assignedContainer"></div>
-                        </div>
-                    </div>
-                    @include("includes.forms.comment", ['showSubmit' => false])
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="submitComment" type="button" class="btn btn-primary">Save comment</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('includes.modals.comment', ['title' => 'Comment On Assignment', 'showAssigned' => true])
+
 @endsection
 
 @section('page_scripts')
@@ -115,7 +90,7 @@
             modal.find('.householdName').text(parent.find('.householdName').text());
             modal.find('.assignedContainer').html(parent.find('.assignedContainer').html());
             
-            $("#householdId").remove();
+            $("#ministerId").remove();
             $("<input>").attr({
                 name: "ministerId",
                 id: "ministerId",
