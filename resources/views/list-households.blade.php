@@ -10,7 +10,6 @@
     <div class="container-fluid">
         <div class="row justify-content-center" style="position:relative;">
             <h1>Households</h1>
-            @dump($households)
             <div id="householdsContainer">
             	@foreach($households as $household)
             		<div class='household' data-householdid='{{ $household->id }}'>
