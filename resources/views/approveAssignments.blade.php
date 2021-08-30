@@ -34,6 +34,7 @@
                             </div>
                             
                             <div class="assignedApprovalContainer">
+                                <h3>To be ministered by:</h3>
                                 <div class="assignedContainer">
                                     @foreach($ag['individuals'] as $individual)
                                         @if(!is_null($individual))
@@ -52,18 +53,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class='allComments'>
+                        <div class='feedbackContainer'>
                             <h3>Feedback</h3>
-                            @forelse($ag['assignment']->comments->sortByDesc('created_at') as $comment)
-                                <div class='ministeringComment' data-commentid="{{ $comment->id }}">
-                                    <author>
-                                        {{ $comment->author->name }} - {{ $comment->updated_at->timezone(Session::get('user_timezone', 'America/Denver'))->format('Y-m-d h:i A')}}
-                                    </author>
-                                    <p class="commentBody">{{ $comment->body }}</p>
-                                </div>
-                            @empty
-                                <p>No feedback provided</p>
-                            @endforelse
+                            <div class='allComments'>
+                                @forelse($ag['assignment']->comments->sortByDesc('created_at') as $comment)
+                                    <div class='ministeringComment' data-commentid="{{ $comment->id }}">
+                                        <author>
+                                            {{ $comment->author->name }} - {{ $comment->updated_at->timezone(Session::get('user_timezone', 'America/Denver'))->format('Y-m-d h:i A')}}
+                                        </author>
+                                        <p class="commentBody">{{ $comment->body }}</p>
+                                    </div>
+                                @empty
+                                    <p>No feedback provided</p>
+                                @endforelse
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -122,16 +125,5 @@
         });
 
         approvalHelper.functions.init();
-
-        const commentTemplate = function commentTemplate(id, body, author ) {
-            return `
-                <div class='ministeringComment' data-commentid="${id}">
-                    <author>${author}</author>
-                    <p class="commentBody">${body}</p>
-                </div>
-            `;
-        };
-
-        approvalHelper.functions.setDataAttr('commentTemplate', commentTemplate);
     </script>
 @endsection

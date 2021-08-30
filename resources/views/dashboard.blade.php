@@ -8,6 +8,10 @@
     @section('content')
         <div class="py-12">
             <div id="userLinks" class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 flex text-center">
+                @if(Auth::user()->canManage)
+                    <a href="{{ route('all-households') }}" class="btn btn-outline-dark btn-light">View Households</a>
+                @endif
+
                 <a href="{{ route('ward-list') }}" class="btn btn-outline-dark btn-light">Manage Assignments</a>
 
                 @if(Auth::user()->canApprove)

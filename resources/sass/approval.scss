@@ -88,22 +88,20 @@ h1 {
 				margin-bottom: 10px;
 			}
 
-			.allComments {
+			.feedbackContainer {
 				margin: 10px auto 10px;
-				max-height: 250px;
-				overflow: auto;
-				width: 90%;
-				// text-align: left;
-				@include overflowShadows($black);
 
-				// h3 {
-				// 	text-align: center;
-				// }
+				.allComments {
+					max-height: 250px;
+					overflow: auto;
+					width: 90%;
+					@include overflowShadows($black);
 
-				.ministeringComment {
-					@include comment;
+					.ministeringComment {
+						@include comment;
+					}
+
 				}
-
 			}
 		}
 	}
@@ -179,19 +177,22 @@ h1 {
 				}
 			}
 
-			.allComments {
+			.feedbackContainer {
 				padding-top: 40px;
-				margin: 0 0 10px;
-				max-height: 250px;
-				overflow: auto;
 				width: fit-content;
 				max-width: 47%;
-				@include overflowShadows($black);
 
-				.ministeringComment {
-					@include comment;
+				.allComments {
+					margin: 0 0 10px;
+					max-height: 250px;
+					overflow: auto;
+					@include overflowShadows($black);
+
+					.ministeringComment {
+						@include comment;
+					}
+
 				}
-
 			}
 		}
 	}

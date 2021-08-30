@@ -29,6 +29,18 @@ class Households extends Model
 		'status'
 	];
 
+    public static function getHouseholds() {
+        $appEnv = env('APP_ENV', 'prod');
+
+        if($appEnv === 'prod' || $appEnv === 'production') {
+            $households = Households::get();
+        } else {
+            $households = Households::take(20)->get();
+        }
+
+        return $households;
+    }
+
 	public function husband() {
 		return Individuals::find($this->husband_id) ?? new Individuals;
 	}

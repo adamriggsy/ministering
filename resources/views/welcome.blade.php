@@ -89,19 +89,7 @@
     <script>
         $(function(){
             ministeringHelper.functions.init({!! $households->toJson() !!});
-
             ministeringHelper.functions.resetDataTable();
-
-            const commentTemplate = function commentTemplate(id, body, author ) {
-                return `
-                    <div class='houseComment' data-commentid="${id}">
-                        <author>${author}</author>
-                        <p class="commentBody">${body}</p>
-                    </div>
-                `;
-            };
-
-            ministeringHelper.functions.setDataAttr('commentTemplate', commentTemplate);
         });
     </script>
 @endsection
