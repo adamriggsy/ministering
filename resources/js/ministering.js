@@ -8,6 +8,7 @@ window.ministeringHelper = function () {
     	'unassignedHouseholds': false,
     	'activeHousehold': null,
     	'ac': false,
+        'tickerTemplate': null
     };
 
     let css = {
@@ -50,7 +51,11 @@ window.ministeringHelper = function () {
     		'minSis' : '.hh_ministeringSis',
     		'minBro' : '.hh_ministeringBro',
     		'minTo' : '.hh_ministeringTo'
-    	}
+    	},
+        'ticker' : {
+            'mainContainer': '#unassignedTicker',
+            'container' : '#unassignedTicker .ticker'
+        }
     };
 
     const commentTemplate = function commentTemplate(id, body, author ) {
@@ -62,6 +67,12 @@ window.ministeringHelper = function () {
         `;
     };
 
+    const tickerTemplate = function tickerTemplate(content) {
+        return `
+            <div class="ticker__item">${content}</div>
+        `;
+    }
+
     let functions = {
     	'init' : function(households) {
     		$.ajaxSetup({
@@ -71,6 +82,7 @@ window.ministeringHelper = function () {
 			});
 
     		functions.setDataAttr('households', households);
+            functions.setDataAttr('tickerTemplate', tickerTemplate);
     		functions.getUnassignedHouseholds();
             commentsHelper.functions.init();
             commentsHelper.functions.setDataAttr('commentTemplate', commentTemplate);
@@ -148,6 +160,7 @@ window.ministeringHelper = function () {
 				functions.setDataAttr('unassignedHouseholds', response);
 				functions.setDataAttr('ac', false);
 				functions.setAutocomplete();
+                functions.updateTicker();
 			});
     	},
     	'assignHousehold' : function(assignedId) {
@@ -349,7 +362,18 @@ window.ministeringHelper = function () {
                 );
             }
         },
-    	
+    	'updateTicker' : function() {
+            let unassignedHouseholds = _.clone(functions.getDataAttr('unassignedHouseholds'));
+
+            let shuffled = _.shuffle(unassignedHouseholds);
+
+            $(css.ticker.container).append(data.tickerTemplate('Unassigned Households: '));
+
+            $.each(_.slice(shuffled,0,50), function(key, household) {
+                // console.log(household);
+                $(css.ticker.container).append(data.tickerTemplate(household.label));
+            });
+        }
     };
 
     $(document).on('click touch', '.assignHousehold', function() {
@@ -381,6 +405,10 @@ window.ministeringHelper = function () {
             $(css.activeHousehold.comments.formError),
             ''
         );
+    });
+
+    $(document).on('click touch', '#tickerClose', function() {
+        $(css.ticker.mainContainer).remove();
     });
 
     return {

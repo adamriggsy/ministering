@@ -78,6 +78,12 @@
             </div>
         </div>
     </div>
+    <div id="unassignedTicker" class="ticker-wrap">
+        <i id="tickerClose" class="ticker-close bi bi-x-circle text-lg"></i>
+        <div class='ticker'>
+            
+        </div>
+    </div>
 @endsection
 
 @section('page_scripts')

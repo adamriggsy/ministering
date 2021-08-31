@@ -46,6 +46,7 @@ class HouseholdController extends BaseController
         ]);
 
         return response()->json([
+            'household' => $household,
             'comments' => $household->comments()->with('author')->get(),
             'saved' => $newComment
         ]);

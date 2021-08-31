@@ -113,7 +113,7 @@ window.householdsHelper = function () {
                 return (household.id === id);
             });
             return filteredHouseholds[0];
-        },
+        }
     };
 
 	$(document).on('click touch', '#submitComment', function(e) {
