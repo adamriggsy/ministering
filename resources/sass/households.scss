@@ -10,7 +10,6 @@ h1 {
 
 
 #householdsContainer {
-
 	display: flex;
 	flex-flow: wrap;
 	justify-content: flex-start;
@@ -24,6 +23,14 @@ h1 {
 		margin-right: 3%;
 		display: flex;
 		flex-direction: column;
+
+		&.showAllCommentsBtn {
+			.commentBtns {
+				.showAllComments {
+					display: block;
+				}
+			}
+		}
 
 		.nameContainer {
 			margin-bottom: 0;
@@ -66,6 +73,17 @@ h1 {
 
 		.commentBtns {
 			margin-top: auto;
+
+			&.full-width {
+				.commentBtn {
+					display: block;
+					width: 100%;
+				}
+			}
+
+			.showAllComments {
+				display: none;
+			}
 		}
 	}
 }

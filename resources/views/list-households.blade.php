@@ -10,9 +10,12 @@
     <div class="container-fluid">
         <div class="row justify-content-center" style="position:relative;">
             <h1>Households</h1>
-            <div id="householdsContainer">
+            <div id="householdsContainer" data-maxcommentsshown="{{ $commentMax }}">
             	@foreach($households as $household)
-            		<div class='household' data-householdid='{{ $household->id }}'>
+            		<div 
+                        class='household {{ $household->comments->count() > $commentMax ? 'showAllCommentsBtn' : ''}}' 
+                        data-householdid='{{ $household->id }}'
+                    >
             			<h2 class="nameContainer">
             				<span class="householdName">
             					{{ $household->fullHouseholdName }}
@@ -33,15 +36,13 @@
                                 <p class="text-center">No comments yet.</p>
                             @endforelse
             			</div>
-            			<div class='commentBtns btn-group btn-group-sm'>
-            				<button class="btn btn-primary" data-bs-target="#commentModal" data-bs-toggle="modal">
+            			<div class='commentBtns btn-group-sm {{ $household->comments->count() > $commentMax ? 'btn-group' : 'full-width'}}'>
+            				<button class="commentBtn btn btn-primary" data-bs-target="#commentModal" data-bs-toggle="modal">
             					Comment
             				</button>
-            				@if($household->comments->count() > $commentMax)
-            					<button class="btn btn-outline-dark btn-light" data-bs-target="#householdModal" data-bs-toggle="modal">
-	            					See All
-	            				</button>
-            				@endif
+        					<button class="showAllComments btn btn-outline-dark btn-light" data-bs-target="#householdModal" data-bs-toggle="modal">
+            					See All
+            				</button>
             			</div>
             		</div>
             	@endforeach

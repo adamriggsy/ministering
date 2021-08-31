@@ -19,11 +19,13 @@ window.householdsHelper = function () {
         },
         'comments': {
             'form': '#newComment',
-            'formError': '#commentError'
+            'formError': '#commentError',
+            'commentCount': '.count',
+            'buttons': '.commentBtns'
         },
         'household': {
             'container': '.household',
-            'comments': '.allComments'
+            'comments': '.allComments',
         }
     };
 
@@ -59,7 +61,7 @@ window.householdsHelper = function () {
     		return data;
     	},
         'getActiveContainerById' : function(householdId) {
-            return $('[data-householdid="' + householdId + '"] ' + css.household.comments);
+            return $('[data-householdid="' + householdId + '"] ');
         },
     	'createComment' : function() {
     		const form = $(css.comments.form);
@@ -81,11 +83,27 @@ window.householdsHelper = function () {
                 commentsHelper.functions.resetCommentForm(
                     $(css.comments.form)[0]
                 );
+
+                let activeContainer = functions.getActiveContainerById(functions.getDataAttr('currentHouseholdId'));
                 commentsHelper.functions.buildComments(
-                    functions.getActiveContainerById(functions.getDataAttr('currentHouseholdId')),
+                    activeContainer.find(css.household.comments),
                     response.comments,
                     'No comments yet.'
                 );
+
+                console.log(activeContainer);
+                console.log(activeContainer.find(css.comments.commentCount));
+                console.log(response.comments.length);
+
+                let numComments = response.comments.length;
+                let maxShown = parseInt($(css.mainContainer).data('maxcommentsshown'));
+                
+                activeContainer.find(css.comments.commentCount).text(numComments);
+                if(numComments > maxShown) {
+                    activeContainer.addClass('showAllCommentsBtn')
+                }
+
+                functions.handleBtnGroup(activeContainer.find(css.comments.buttons));
                 $(css.modals.comment).modal('hide');
             } else {
                 commentsHelper.functions.setCommentError(
@@ -113,7 +131,16 @@ window.householdsHelper = function () {
                 return (household.id === id);
             });
             return filteredHouseholds[0];
-        }
+        },
+        'handleBtnGroup' : function(container) {
+            let countVisible = $('.btn-group', container).find('button').not(':hidden').length;
+
+            if(countVisible === 1) {
+                container.removeClass('btn-group').addClass('full-width');
+            } else {
+                container.addClass('btn-group').removeClass('full-width');
+            }
+        },
     };
 
 	$(document).on('click touch', '#submitComment', function(e) {
