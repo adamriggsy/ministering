@@ -80,6 +80,8 @@ window.householdsHelper = function () {
     	},
         'commentCreateSuccess' : function(response) {
             if(response.saved) {
+                functions.replaceHouseholdComments(response.comments);
+                
                 commentsHelper.functions.resetCommentForm(
                     $(css.comments.form)[0]
                 );
@@ -90,10 +92,6 @@ window.householdsHelper = function () {
                     response.comments,
                     'No comments yet.'
                 );
-
-                console.log(activeContainer);
-                console.log(activeContainer.find(css.comments.commentCount));
-                console.log(response.comments.length);
 
                 let numComments = response.comments.length;
                 let maxShown = parseInt($(css.mainContainer).data('maxcommentsshown'));
@@ -126,6 +124,13 @@ window.householdsHelper = function () {
                 'No comments yet.'
             );
         },
+        'replaceHouseholdComments' : function(hComments) {
+            let householdKey = data.households.findIndex(function(household) {
+                return (household.id === parseInt(functions.getDataAttr('currentHouseholdId')));
+            });
+
+            data.households[householdKey]['comments'] = hComments;
+        }, 
         'getHouseholdById' : function(id) {
             let filteredHouseholds = data.households.filter(function(household) {
                 return (household.id === id);
