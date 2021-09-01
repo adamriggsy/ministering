@@ -29,13 +29,13 @@ class Households extends Model
 		'status'
 	];
 
-    public static function getHouseholds() {
+    public static function getHouseholds(bool $getAll = false) {
         $appEnv = env('APP_ENV', 'prod');
 
-        if($appEnv === 'prod' || $appEnv === 'production') {
-            $households = Households::orderBy('last_name')->get();
+        if($appEnv === 'prod' || $appEnv === 'production' || $getAll) {
+            $households = Households::orderBy('last_name');
         } else {
-            $households = Households::orderBy('last_name')->take(20)->get();
+            $households = Households::orderBy('last_name')->take(20);
         }
 
         return $households;

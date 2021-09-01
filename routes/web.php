@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::get('/households', [HouseholdController::class, 'allHouseholds'])->name('all-households');
 	Route::get('/api/households/unassigned', [HouseholdController::class, 'unassigned']);
+	Route::get('/api/household/{household}', [HouseholdController::class, 'getHousehold']);
 	Route::get('/api/household/{household}/comments', [HouseholdController::class, 'getHouseholdComments']);
 	Route::post('/api/household/{household}/comments/create', [HouseholdController::class, 'createHouseholdComment']);
 

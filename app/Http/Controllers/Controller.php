@@ -31,6 +31,6 @@ class Controller extends BaseController
     public function wardList(Request $request) {
     	return view('welcome')
     		->with('user', Auth::user())
-    		->with('households', Households::getHouseholds());
+    		->with('households', Households::getHouseholds()->get());
     }
 }

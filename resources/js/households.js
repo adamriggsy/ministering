@@ -4,8 +4,11 @@ window.householdsHelper = function () {
     'use strict';
 
     var data = {
-        'households': null,
-        'currentHouseholdId': null
+        'households': {},
+        'currentHouseholdId': null,
+        'householdSearch': null,
+        'ac': null,
+        'maxCommentsShown': 4
     };
 
     var css = css = {
@@ -24,32 +27,59 @@ window.householdsHelper = function () {
             'buttons': '.commentBtns'
         },
         'household': {
-            'container': '.household',
+            'container': '#householdsContainer .household',
             'comments': '.allComments',
+            'name': '.householdName',
+            'count': '.count',
+            'commentButton': '.commentBtn'
+        },
+        'search': {
+            'input': '#searchHouseholds'
         }
     };
 
-    const commentTemplate = function commentTemplate(id, body, author ) {
+    const commentTemplate = function commentTemplate(id, body, authorName, commentDate ) {
         return `
             <div class='householdComment' data-commentid="${id}">
-                <author>${author}</author>
+                <author>${authorName} - ${commentDate}</author>
+                <p class="commentBody">${body}</p>
+            </div>
+        `;
+    };
+
+    const commentCardTemplate = function commentCardTemplate(id, body, authorName, commentDate) {
+        return `
+            <div class='householdComment-card' data-commentid="${id}">
+                <author>
+                    <p class="authorName">
+                        ${authorName}
+                    </p>
+                    <p class="commentDate">
+                        ${commentDate}
+                    </p>
+                </author>
                 <p class="commentBody">${body}</p>
             </div>
         `;
     };
 
     var functions = {
-    	'init' : function(households) {
+    	'init' : function(household, householdSearch) {
     		$.ajaxSetup({
 			    headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    }
 			});
 
-            functions.setDataAttr('households', households);
+            // functions.setDataAttr('households', household);
+            data.households[household.id] = household;
+            functions.setDataAttr('householdSearch', householdSearch);
+            functions.setDataAttr('maxCommentsShown', $(css.mainContainer).data('maxcommentsshown'));
+            functions.setAutocomplete();
 
             commentsHelper.functions.init();
             commentsHelper.functions.setDataAttr('commentTemplate', commentTemplate);
+            commentsHelper.functions.setDataAttr('commentCardTemplate', commentCardTemplate);
     	},
     	'setDataAttr' : function(attr, val) {
     		data[attr] = val;
@@ -88,6 +118,7 @@ window.householdsHelper = function () {
 
                 let activeContainer = functions.getActiveContainerById(functions.getDataAttr('currentHouseholdId'));
                 commentsHelper.functions.buildComments(
+                    commentsHelper.functions.getDataAttr('commentTemplate'),
                     activeContainer.find(css.household.comments),
                     response.comments,
                     'No comments yet.'
@@ -119,6 +150,7 @@ window.householdsHelper = function () {
             modal.find('.householdName').text(houseData.fullHouseholdName);
 
             commentsHelper.functions.buildComments(
+                commentsHelper.functions.getDataAttr('commentTemplate'),
                 $(css.modals.household.comments, modal),
                 houseData.comments,
                 'No comments yet.'
@@ -132,13 +164,10 @@ window.householdsHelper = function () {
             data.households[householdKey]['comments'] = hComments;
         }, 
         'getHouseholdById' : function(id) {
-            let filteredHouseholds = data.households.filter(function(household) {
-                return (household.id === id);
-            });
-            return filteredHouseholds[0];
+            return data.households[id];
         },
         'handleBtnGroup' : function(container) {
-            let countVisible = $('.btn-group', container).find('button').not(':hidden').length;
+            let countVisible = container.find('button').not(':hidden').length;
 
             if(countVisible === 1) {
                 container.removeClass('btn-group').addClass('full-width');
@@ -146,12 +175,78 @@ window.householdsHelper = function () {
                 container.addClass('btn-group').removeClass('full-width');
             }
         },
+        'setAutocomplete' : function() {
+            $("#householdSearch").html('').append('<input type="text" class="form-control form-control-lg" id="searchHouseholds" placeholder="Find a household..." autocomplete="off">');
+            functions.setDataAttr('ac', false);
+
+
+            const field = document.getElementById('searchHouseholds');
+            let ac = new Autocomplete(field, {
+                data: householdsHelper.functions.getDataAttr('householdSearch'),
+                maximumItems: 10,
+                treshold: 1,
+                highlightTyped: false,
+                onSelectItem: ({label, value}) => {
+                    functions.getHouseholdData(parseInt(value));
+                }
+            });
+
+            functions.setDataAttr('ac', ac);
+        },
+        'showHousehold' : function(hData) {
+            let hContainer = $(css.household.container).first().clone();
+            
+            commentsHelper.functions.buildComments(
+                commentsHelper.functions.getDataAttr('commentCardTemplate'),
+                $(css.household.comments, hContainer),
+                hData.comments
+            );
+
+            let countClass = hData.comments.length > functions.getDataAttr('maxCommentsShown') ? 'showAllCommentsBtn' : '';
+
+            hContainer.removeClass().addClass('household ' + countClass);
+            hContainer.data('householdid', hData.household.id);
+            $(css.household.name, hContainer).text(hData.household.fullHouseholdName);
+            $(css.household.count, hContainer).text(hData.comments.length);
+
+            functions.resetHouseholdVisibility(hContainer);
+            $(css.mainContainer).prepend(hContainer);
+
+            functions.handleBtnGroup(hContainer.find(css.comments.buttons));
+
+            $(css.search.input).val('');
+        },
+        'getHouseholdData' : function(householdId) {
+            $.getJSON('/api/household/' + householdId, function( response ) {
+                functions.addToHouseholds(response);
+                functions.showHousehold(response);
+            });
+        },
+        'addToHouseholds': function(hData) {
+            data.households[hData.household.id] = {
+                ...hData.household,
+                'comments': hData.comments
+            }
+        },
+        'toggleHouseholdVisibility': function(container) {
+            container.find('.canHide').toggle(850);
+            container.find('.content-hide').toggleClass('bi-plus-circle-dotted bi-dash-circle-dotted');
+        },
+        'resetHouseholdVisibility': function(container) {
+            container.find('.canHide').show();
+            container.find('.content-hide').removeClass().addClass('content-hide bi-dash-circle-dotted');
+        }
     };
 
 	$(document).on('click touch', '#submitComment', function(e) {
 		e.preventDefault();
 		functions.createComment();
-    });   
+    });
+
+    $(document).on('click touch', '.content-hide', function(e) {
+        e.preventDefault();
+        functions.toggleHouseholdVisibility($(this).closest('.household'));
+    });
 
     return {
         data : functions.getAllData,

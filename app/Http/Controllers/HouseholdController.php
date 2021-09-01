@@ -15,9 +15,19 @@ class HouseholdController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function allHouseholds() {
+        $household = Households::first();
+        $householdSearch = [];
+        Households::getHouseholds(true)->get()->each(function($item, $key) use (&$householdSearch) {
+            $householdSearch[] = [
+                'value' => $item->id,
+                'label' => $item->fullHouseholdName
+            ];
+        });
+
         return view('list-households')
             ->with('commentMax', 3)
-            ->with('households', Households::getHouseholds());
+            ->with('household', $household)
+            ->with('householdSearch', $householdSearch);
     }
 
     public function unassigned() {
@@ -36,6 +46,13 @@ class HouseholdController extends BaseController
 
     public function getHouseholdComments(Households $household) {
         return response()->json($household->comments()->with('author')->get());
+    }
+
+    public function getHousehold(Households $household) {
+        return response()->json([
+            'household' => $household,
+            'comments' => $household->comments
+        ]);
     }
 
     public function createHouseholdComment(Request $request, Households $household) {

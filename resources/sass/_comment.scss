@@ -1,8 +1,36 @@
 @mixin comment {
+	margin-bottom: 20px;
+
+	author {
+	    font-size: 12px;
+	    font-style: italic;
+	}
+
+	.commentBody {
+		margin-top: 10px;
+		border-left: 6px solid $lightgrey;
+		padding-left: 10px;
+	}
+}
+
+@mixin comment-card($width:200px) {
+	width: $width;
+	padding: 10px;
 	margin-bottom: 10px;
 
 	author {
 	    font-size: 12px;
 	    font-style: italic;
+	    margin-bottom: 10px;
+
+	    span {
+	    	display: block;
+	    }
+	}
+
+	.commentBody {
+		margin-top: 10px;
+		border-left: 6px solid $lightgrey;
+		padding-left: 10px;
 	}
 }

@@ -10,42 +10,90 @@
     <div class="container-fluid">
         <div class="row justify-content-center" style="position:relative;">
             <h1>Households</h1>
+            <div id="householdSearch"></div>
+
             <div id="householdsContainer" data-maxcommentsshown="{{ $commentMax }}">
-            	@foreach($households as $household)
-            		<div 
-                        class='household {{ $household->comments->count() > $commentMax ? 'showAllCommentsBtn' : ''}}' 
-                        data-householdid='{{ $household->id }}'
-                    >
-            			<h2 class="nameContainer">
-            				<span class="householdName">
-            					{{ $household->fullHouseholdName }}
-            				</span>
-            				<i class="bi bi-chat-right-fill text-lg d-flex flex-column">
-            					<span class="count">{{$household->comments->count()}}</span>
-            				</i>
-        				</h2>
-            			<div class="allComments">
-            				@forelse($household->comments->sortByDesc('created_at')->slice(0, $commentMax) as $comment)
-                                <div class='householdComment' data-commentid="{{ $comment->id }}">
-                                    <author>
-                                        {{ $comment->author->name }} - {{ $comment->updated_at->timezone(Session::get('user_timezone', 'America/Denver'))->format('Y-m-d h:i A')}}
-                                    </author>
-                                    <p class="commentBody">{{ $comment->body }}</p>
-                                </div>
-                            @empty
-                                <p class="text-center">No comments yet.</p>
-                            @endforelse
-            			</div>
-            			<div class='commentBtns btn-group-sm {{ $household->comments->count() > $commentMax ? 'btn-group' : 'full-width'}}'>
-            				<button class="commentBtn btn btn-primary" data-bs-target="#commentModal" data-bs-toggle="modal">
-            					Comment
-            				</button>
-        					<button class="showAllComments btn btn-outline-dark btn-light" data-bs-target="#householdModal" data-bs-toggle="modal">
-            					See All
-            				</button>
-            			</div>
-            		</div>
-            	@endforeach
+                <div 
+                    class="household {{ $household->comments->count() > $commentMax ? 'showAllCommentsBtn' : ''}}"
+                    data-householdid={{$household->id}}
+                >
+                    <i class="content-hide bi bi-dash-circle-dotted"></i>
+                    <div class="firstSection">
+                        <h2 class="nameContainer">
+                            <span class="householdName">{{ $household->fullHouseholdName }}</span>
+                            <i class="bi bi-chat-right-fill text-lg d-flex flex-column">
+                                <span class="count">{{$household->comments->count()}}</span>
+                            </i>
+                        </h2>
+                        <div class="text-center canHide">
+                            <div class='commentBtns btn-group-sm {{ $household->comments->count() > $commentMax ? 'btn-group' : 'full-width'}}'>
+                                <button class="commentBtn btn btn-primary" data-bs-target="#commentModal" data-bs-toggle="modal">
+                                    Comment
+                                </button>
+                                <button class="showAllComments btn btn-outline-dark btn-light" data-bs-target="#householdModal" data-bs-toggle="modal">
+                                    See All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="allComments canHide">
+                        @forelse($household->comments->sortByDesc('created_at')->slice(0, $commentMax) as $comment)
+                            <div class='householdComment-card' data-commentid="{{ $comment->id }}">
+                                <author>
+                                    <span class="authorName">
+                                        {{ $comment->author->name }}
+                                    </span>
+                                    <span class="commentDate">
+                                        {{ $comment->updated_at->timezone(Session::get('user_timezone', 'America/Denver'))->format('Y-m-d h:i A')}}
+                                    </span>
+                                </author>
+                                <p class="commentBody">{{ $comment->body }}</p>
+                            </div>
+                        @empty
+                            <p class="text-center">No comments yet.</p>
+                        @endforelse
+                    </div>
+                </div>
+
+                {{-- <div id="householdsContainer" data-maxcommentsshown="{{ $commentMax }}">
+                <div 
+                    class="household {{ $household->comments->count() > $commentMax ? 'showAllCommentsBtn' : ''}}"
+                    data-householdid={{$household->id}}
+                >
+                    <div class="firstSection">
+                        <h2 class="nameContainer">
+                            <span class="householdName">{{ $household->fullHouseholdName }}</span>
+                            <i class="bi bi-chat-right-fill text-lg d-flex flex-column">
+                                <span class="count">{{$household->comments->count()}}</span>
+                            </i>
+                        </h2>
+                        <div class='commentBtns btn-group-sm {{ $household->comments->count() > $commentMax ? 'btn-group' : 'full-width'}}'>
+                            <button class="commentBtn btn btn-primary" data-bs-target="#commentModal" data-bs-toggle="modal">
+                                Comment
+                            </button>
+                            <button class="showAllComments btn btn-outline-dark btn-light" data-bs-target="#householdModal" data-bs-toggle="modal">
+                                See All
+                            </button>
+                        </div>
+                    </div>
+                    <div class="allComments">
+                        @forelse($household->comments->sortByDesc('created_at')->slice(0, $commentMax) as $comment)
+                            <div class='householdComment-card' data-commentid="{{ $comment->id }}">
+                                <author>
+                                    <span class="authorName">
+                                        {{ $comment->author->name }}
+                                    </span>
+                                    <span class="commentDate">
+                                        {{ $comment->updated_at->timezone(Session::get('user_timezone', 'America/Denver'))->format('Y-m-d h:i A')}}
+                                    </span>
+                                </author>
+                                <p class="commentBody">{{ $comment->body }}</p>
+                            </div>
+                        @empty
+                            <p class="text-center">No comments yet.</p>
+                        @endforelse
+                    </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -56,9 +104,10 @@
 @endsection
 
 @section('page_scripts')
+    <script src="{{asset('js/autocomplete.js')}}"></script>
     <script src="{{asset('js/households.js')}}"></script>
     <script>
-    	householdsHelper.functions.init({!! $households->toJson() !!});
+    	householdsHelper.functions.init({!! json_encode($household) !!}, {!! json_encode($householdSearch) !!});
 
     	$(document).on('show.bs.modal', '#commentModal', function(e) {
             let btn = $(e.relatedTarget);

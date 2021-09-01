@@ -58,10 +58,10 @@ window.ministeringHelper = function () {
         }
     };
 
-    const commentTemplate = function commentTemplate(id, body, author ) {
+    const commentTemplate = function commentTemplate(id, body, authorName, $commentDate ) {
         return `
             <div class='houseComment' data-commentid="${id}">
-                <author>${author}</author>
+                <author>${authorName} - ${commentDate}</author>
                 <p class="commentBody">${body}</p>
             </div>
         `;
@@ -315,6 +315,7 @@ window.ministeringHelper = function () {
             $.getJSON('/api/household/' + data.activeHousehold.id + '/comments', function( comments ) {
 				
 				commentsHelper.functions.buildComments(
+                    commentsHelper.functions.getDataAttr('commentTemplate'),
                     $(css.activeHousehold.comments.allComments),
                     comments
                 );
@@ -345,6 +346,7 @@ window.ministeringHelper = function () {
                 );
                 
                 commentsHelper.functions.buildComments(
+                    commentsHelper.functions.getDataAttr('commentTemplate'),
                     $(css.activeHousehold.comments.allComments),
                     response.comments,
                     'No comments yet.'
@@ -370,7 +372,6 @@ window.ministeringHelper = function () {
             $(css.ticker.container).append(data.tickerTemplate('Unassigned Households: '));
 
             $.each(_.slice(shuffled,0,50), function(key, household) {
-                // console.log(household);
                 $(css.ticker.container).append(data.tickerTemplate(household.label));
             });
         }

@@ -84,6 +84,7 @@ window.approvalHelper = function () {
                     $(css.comments.form)[0]
                 );
                 commentsHelper.functions.buildComments(
+                    commentsHelper.functions.getDataAttr('commentTemplate'),
                     functions.getActiveContainerById(functions.getDataAttr('currentMinisterId')),
                     response.comments,
                     'No feedback provided.'

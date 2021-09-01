@@ -2,7 +2,8 @@ export const commentsHelper = function () {
     'use strict';
 
     let data = {
-        'commentTemplate': null
+        'commentTemplate': null,
+        'commentCardTemplate': null
     };
 
     let css = {
@@ -53,7 +54,7 @@ export const commentsHelper = function () {
                 }
             });
     	},
-    	'buildComments' : function(container, comments, emptyMessage) {
+    	'buildComments' : function(template, container, comments, emptyMessage) {
     		if(typeof emptyMessage === 'undefined') {
                 emptyMessage = 'No comments yet.';
             }
@@ -70,8 +71,8 @@ export const commentsHelper = function () {
                         author = comment.authorInfo;
                     }
                     
-    				let authorInfo = author.name + ' - ' + _moment(comment.updated_at).format('YYYY-MM-DD LT');
-    				let newComment = data.commentTemplate(comment.id, comment.body, authorInfo);
+    				// let authorInfo = author.name + ' - ' + _moment(comment.updated_at).format('YYYY-MM-DD LT');
+    				let newComment = template(comment.id, comment.body, author.name, _moment(comment.updated_at).format('YYYY-MM-DD LT'));
     				container.prepend(newComment);
     			});
             }
