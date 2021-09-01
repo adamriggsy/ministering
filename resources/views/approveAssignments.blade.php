@@ -99,7 +99,7 @@
             }).appendTo(form);
         });
 
-        (document).on('shown.bs.modal', '#commentModal', function(e) {
+        $(document).on('shown.bs.modal', '#commentModal', function(e) {
             $(this).find('#comment').focus();
         });
 
