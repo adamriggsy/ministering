@@ -1,6 +1,7 @@
 @import "@webpixels/css/core/functions";
 
 @import "./_variables";
+@import "./_iPhone-zoom-fix";
 
 @import "@webpixels/css/base";
 @import "@webpixels/css/forms";
@@ -121,5 +122,16 @@ a {
 	}
 	50% {
 		transform: scale(1.5);
+	}
+}
+
+
+@media (max-width:767px) {
+	.navbar-nav .dropdown-menu {
+		border: none;
+	}
+
+	.nav-link.dropdown-toggle {
+		padding: 10px 0 0;
 	}
 }

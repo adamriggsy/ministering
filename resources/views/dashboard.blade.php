@@ -6,8 +6,9 @@
     </x-slot>
 
     @section('content')
-        <div class="py-12">
-            <div id="userLinks" class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 flex text-center">
+        <div class="container-fluid">
+            <h1 class="text-center">Welcome! {{ Auth::user()->name }}</h1>
+            <div id="userLinks" class="mx-auto my-4 text-center d-grid gap-4 d-sm-block">
                 @if(Auth::user()->canManage)
                     <a href="{{ route('all-households') }}" class="btn btn-outline-dark btn-light">View Households</a>
                 @endif

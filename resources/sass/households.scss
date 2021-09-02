@@ -300,3 +300,62 @@ h1 {
 		}
 	}
 }
+
+@media (max-width:767px) {
+	#householdSearch {
+		#searchHouseholds {
+			font-size: 16px;
+		}
+	}
+
+	#householdsContainer {
+
+		.household-v1 {
+			.allComments {
+				.householdComment-card {
+					@include comment-card-mobile;
+				}
+			}
+		}
+
+		.household {
+			.content-hide {
+				right: 0;
+				top: -3px;
+			}
+
+			.firstSection {
+				.nameContainer {
+					margin-right: 40px;
+					margin-bottom: 15px;
+    				margin-top: -5px;
+				}
+			}
+
+			.allComments {
+				width: 100%;
+				overflow: visible;
+				max-height: inherit;
+
+				.householdComment-card {
+					@include comment-card-mobile(100%);
+				}
+
+			}
+
+			.commentBtns {
+				margin-bottom: 10px;
+				max-width: 80%;
+				width: 80%;
+			}
+		}
+
+		.household-card {
+			.allComments {
+				.householdComment {
+					@include comment;
+				}
+			}
+		}
+	}
+}

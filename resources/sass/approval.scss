@@ -95,6 +95,7 @@ h1 {
 					max-height: 250px;
 					overflow: auto;
 					width: 90%;
+					margin: 0 auto;
 					@include overflowShadows($black);
 
 					.ministeringComment {
@@ -191,7 +192,46 @@ h1 {
 					.ministeringComment {
 						@include comment;
 					}
+				}
+			}
+		}
+	}
+}
 
+@media (max-width:767px) {
+	#viewChoiceContainer {
+		display: none;
+	}
+
+	#assignmentContainer {
+		&.ajr-grid, 
+		&.ajr-list {
+			width: 100%;
+			
+			.household {
+				width: 100%;
+				flex-direction: column;
+
+				.approvalBtns {
+					width: 100%;
+
+					btn {
+						padding: .75rem 1rem;
+					}
+				}
+
+				.infoContainer {
+					flex-direction: column;
+					width: 100%;
+			
+					.assignedApprovalContainer {
+						padding-top: 10px;
+					}
+				}
+
+				.feedbackContainer {
+					width: 100%;
+					padding-top: 10px;
 				}
 			}
 		}
