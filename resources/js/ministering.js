@@ -58,7 +58,7 @@ window.ministeringHelper = function () {
         }
     };
 
-    const commentTemplate = function commentTemplate(id, body, authorName, $commentDate ) {
+    const commentTemplate = function commentTemplate(id, body, authorName, commentDate ) {
         return `
             <div class='houseComment' data-commentid="${id}">
                 <author>${authorName} - ${commentDate}</author>
