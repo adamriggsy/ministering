@@ -1,3 +1,220 @@
-*{box-sizing:border-box}@-webkit-keyframes ticker{0%{transform:translateZ(0);visibility:visible}to{transform:translate3d(-100%,0,0)}}@keyframes ticker{0%{transform:translateZ(0);visibility:visible}to{transform:translate3d(-100%,0,0)}}.ticker-wrap{background-color:rgba(0,0,0,.9);bottom:0;box-sizing:content-box;height:4rem;overflow:hidden;padding-left:100%;position:fixed;width:100%}.ticker-wrap .ticker-close{background:red;display:flex;height:100%;justify-content:center;left:0;padding-top:20px;position:absolute;top:0;width:45px;z-index:100}.ticker-wrap .ticker{-webkit-animation-duration:150s;animation-duration:150s;-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite;-webkit-animation-name:ticker;animation-name:ticker;-webkit-animation-timing-function:linear;animation-timing-function:linear;box-sizing:content-box;display:inline-block;height:4rem;line-height:4rem;padding-right:100%;white-space:nowrap}.ticker-wrap .ticker__item{color:#fff;display:inline-block;font-size:2rem;padding:0 2rem}#households{flex-wrap:wrap}#households .household{width:100%}#households .household .individual{margin-left:20px}table.dataTable.table-sm .sorting:after,table.dataTable.table-sm .sorting_asc:after,table.dataTable.table-sm .sorting_desc:after{top:16px}table.dataTable.table-sm .sorting:before,table.dataTable.table-sm .sorting_asc:before,table.dataTable.table-sm .sorting_desc:before{right:1.15em;top:13px}#activeHousehold{grid-gap:50px;border-bottom:1px solid #000;display:grid;grid-template-columns:1fr 2fr 5fr;margin-bottom:30px;padding-bottom:20px}#activeHousehold #assignedToVisitContainer .minToHouse{margin-bottom:5px}#activeHousehold #assignedToVisitContainer .removeAssigned{margin-left:10px}#activeHousehold #ministeringInfo h3{margin-bottom:10px}#activeHousehold #ministeringInfo .removeVisiting{font-size:14px}#activeHousehold #householdComments .nav-tabs .nav-item{margin-left:0;margin-right:0;text-align:center}#activeHousehold #householdComments .nav-tabs .nav-item .nav-link{padding:.5rem;width:100%}#activeHousehold #householdComments .nav-tabs .nav-item .nav-link.active{background-color:#666;color:#fff}#activeHousehold #householdComments #view{padding-top:10px}#activeHousehold #householdComments #view #commentsContainer{background:linear-gradient(#fff 30%,hsla(0,0%,100%,0)),linear-gradient(hsla(0,0%,100%,0),#fff 70%) 0 100%,radial-gradient(farthest-side at 50% 0,rgba(0,0,0,.2),transparent),radial-gradient(farthest-side at 50% 100%,rgba(0,0,0,.2),transparent) 0 100%;background-attachment:local,local,scroll,scroll;background-color:#fff;background-repeat:no-repeat;background-size:100% 40px,100% 40px,100% 14px,100% 14px;height:150px;overflow:auto}#activeHousehold #householdComments #view #commentsContainer .houseComment{margin-bottom:20px}#activeHousehold #householdComments #view #commentsContainer .houseComment author{font-size:12px;font-style:italic}#activeHousehold #householdComments #view #commentsContainer .houseComment .commentBody{border-left:6px solid #e7eaf0;margin-top:10px;padding-left:10px}#allHouseholdsTable tr.community .color{background-color:#5325be;color:#fff;width:3px}#allHouseholdsTable tr.approval .color{background-color:#25be32;color:#000;width:3px}#allHouseholdsTable tr.single-man .color{background-color:#5c7dca;color:#fff;width:3px}#allHouseholdsTable tr.single-woman .color{background-color:#ca5cca;color:#000;width:3px}#assignHouseholdContainer{margin:10px 0 5px;width:100%}#assignHouseholdContainer .removeAssigned{margin-left:5px}#activeClose{position:absolute;right:0;top:0}#activeClose,.bi-x-circle{cursor:pointer}@media (max-width:767px){#activeHousehold{grid-gap:5px;grid-template-columns:100%}#activeHousehold>div{margin-bottom:10px;margin-right:0;width:100%}#activeHousehold #householdInfo{align-items:baseline;display:flex;order:1}#activeHousehold #householdInfo>*{margin-right:10px}#activeHousehold #assignHouseholdContainer{margin-bottom:0;margin-top:0}#activeHousehold #ministeringInfo{order:2}#activeHousehold #householdComments{order:3}}
+* {
+  box-sizing: border-box;
+}
 
-/*# sourceMappingURL=ministering.css.map*/
+@-webkit-keyframes ticker {
+  0% {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@keyframes ticker {
+  0% {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+.ticker-wrap {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 4rem;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding-left: 100%;
+  box-sizing: content-box;
+}
+.ticker-wrap .ticker-close {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  background: red;
+  height: 100%;
+  width: 45px;
+  z-index: 100;
+  justify-content: center;
+  display: flex;
+  padding-top: 20px;
+}
+.ticker-wrap .ticker {
+  display: inline-block;
+  height: 4rem;
+  line-height: 4rem;
+  white-space: nowrap;
+  padding-right: 100%;
+  box-sizing: content-box;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-name: ticker;
+  animation-name: ticker;
+  -webkit-animation-duration: 100s;
+  animation-duration: 100s;
+}
+.ticker-wrap .ticker__item {
+  display: inline-block;
+  padding: 0 2rem;
+  font-size: 2rem;
+  color: white;
+}
+
+#households {
+  flex-wrap: wrap;
+}
+#households .household {
+  width: 100%;
+}
+#households .household .individual {
+  margin-left: 20px;
+}
+
+table.dataTable.table-sm .sorting:after,
+table.dataTable.table-sm .sorting_asc:after,
+table.dataTable.table-sm .sorting_desc:after {
+  top: 16px;
+}
+
+table.dataTable.table-sm .sorting:before,
+table.dataTable.table-sm .sorting_asc:before,
+table.dataTable.table-sm .sorting_desc:before {
+  top: 13px;
+  right: 1.15em;
+}
+
+#activeHousehold {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 2fr 5fr;
+  grid-gap: 50px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #000;
+}
+#activeHousehold #assignedToVisitContainer .minToHouse {
+  margin-bottom: 5px;
+}
+#activeHousehold #assignedToVisitContainer .removeAssigned {
+  margin-left: 10px;
+}
+#activeHousehold #ministeringInfo h3 {
+  margin-bottom: 10px;
+}
+#activeHousehold #ministeringInfo .removeVisiting {
+  font-size: 14px;
+}
+#activeHousehold #householdComments .nav-tabs .nav-item {
+  text-align: center;
+  margin-right: 0;
+  margin-left: 0;
+}
+#activeHousehold #householdComments .nav-tabs .nav-item .nav-link {
+  width: 100%;
+  padding: 0.5rem;
+}
+#activeHousehold #householdComments .nav-tabs .nav-item .nav-link.active {
+  background-color: #666;
+  color: #fff;
+}
+#activeHousehold #householdComments #view {
+  padding-top: 10px;
+}
+#activeHousehold #householdComments #view #commentsContainer {
+  height: 150px;
+  overflow: auto;
+  background: linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background: linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll, scroll;
+}
+#activeHousehold #householdComments #view #commentsContainer .houseComment {
+  margin-bottom: 20px;
+}
+#activeHousehold #householdComments #view #commentsContainer .houseComment author {
+  font-size: 12px;
+  font-style: italic;
+}
+#activeHousehold #householdComments #view #commentsContainer .houseComment .commentBody {
+  margin-top: 10px;
+  border-left: 6px solid #E7EAF0;
+  padding-left: 10px;
+}
+
+#allHouseholdsTable tr.community .color {
+  background-color: #5325be;
+  width: 3px;
+  color: #fff;
+}
+#allHouseholdsTable tr.approval .color {
+  background-color: #25be32;
+  width: 3px;
+  color: #000;
+}
+#allHouseholdsTable tr.single-man .color {
+  background-color: #5c7dca;
+  width: 3px;
+  color: #fff;
+}
+#allHouseholdsTable tr.single-woman .color {
+  background-color: #Ca5cca;
+  width: 3px;
+  color: #000;
+}
+
+#assignHouseholdContainer {
+  width: 100%;
+  margin: 10px 0 5px;
+}
+#assignHouseholdContainer .removeAssigned {
+  margin-left: 5px;
+}
+
+#activeClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.bi-x-circle {
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  #activeHousehold {
+    grid-template-columns: 100%;
+    grid-gap: 5px;
+  }
+  #activeHousehold > div {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  #activeHousehold #householdInfo {
+    order: 1;
+    display: flex;
+    align-items: baseline;
+  }
+  #activeHousehold #householdInfo > * {
+    margin-right: 10px;
+  }
+  #activeHousehold #assignHouseholdContainer {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  #activeHousehold #ministeringInfo {
+    order: 2;
+  }
+  #activeHousehold #householdComments {
+    order: 3;
+  }
+}

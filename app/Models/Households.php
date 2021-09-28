@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+// use App\Scopes\NotMovedScope;
 
 class Households extends Model
 {
+    // const IGNORE_STATUSES = ['moved'];
+
 	/**
      * The attributes that are mass assignable.
      *
@@ -29,6 +32,16 @@ class Households extends Model
 		'status'
 	];
 
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    // protected static function booted()
+    // {
+    //     static::addGlobalScope(new NotMovedScope);
+    // }
+
     public static function getHouseholds(bool $getAll = false) {
         $appEnv = env('APP_ENV', 'prod');
 
@@ -48,6 +61,14 @@ class Households extends Model
 	public function wife() {
 		return Individuals::find($this->wife_id) ?? new Individuals;
 	}
+    
+    // public function husband() {
+    //     return $this->hasOne(Individuals::class, 'husband_id')->withDefault();
+    // }
+
+    // public function wife() {
+    //     return $this->hasOne(Individuals::class, 'wife_id')->withDefault();   
+    // }
 
 	public function head() {
 		return !is_null($this->husband()->name) ? $this->husband() : $this->wife();

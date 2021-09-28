@@ -286,12 +286,10 @@ window.ministeringHelper = function () {
                     },
                     {
                         "targets": 4,
-                        "orderable": false,
                         "width": '14%'
                     },
                     {
                         "targets": 5,
-                        "orderable": false,
                         "width": '14%'
                     },
                     {
@@ -367,8 +365,9 @@ window.ministeringHelper = function () {
     	'updateTicker' : function() {
             let unassignedHouseholds = _.clone(functions.getDataAttr('unassignedHouseholds'));
 
-            let shuffled = _.shuffle(unassignedHouseholds);
+            let shuffled = _.shuffle(_.shuffle(unassignedHouseholds));
 
+            $(css.ticker.container).html('');
             $(css.ticker.container).append(data.tickerTemplate('Unassigned Households: '));
 
             $.each(_.slice(shuffled,0,50), function(key, household) {

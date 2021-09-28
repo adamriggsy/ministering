@@ -30,6 +30,7 @@ table.dataTable.table-sm .sorting_desc:before {
 
 
 #activeHousehold {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 2fr 5fr;
     grid-gap: 50px;

@@ -14,14 +14,18 @@ class HouseholdController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    const IGNORE_STATUSES = ['moved'];
+
     public function allHouseholds() {
         $household = Households::first();
         $householdSearch = [];
         Households::getHouseholds(true)->get()->each(function($item, $key) use (&$householdSearch) {
-            $householdSearch[] = [
-                'value' => $item->id,
-                'label' => $item->fullHouseholdName
-            ];
+            if(!in_array($item->status, self::IGNORE_STATUSES)) {
+                $householdSearch[] = [
+                    'value' => $item->id,
+                    'label' => $item->fullHouseholdName
+                ];
+            }
         });
 
         return view('list-households')
@@ -34,12 +38,14 @@ class HouseholdController extends BaseController
         $return = [];
 
         foreach(Households::doesntHave('ministeredBy')->get() as $household) {
-            $firstName = $household->head()->name;
+            if(!in_array($household->head()->status, self::IGNORE_STATUSES)) {
+                $firstName = $household->head()->name;
 
-            $return[] = [
-                'value' => $household->id,
-                'label' => $household->last_name . ', ' . $firstName
-            ];
+                $return[] = [
+                    'value' => $household->id,
+                    'label' => $household->last_name . ', ' . $firstName
+                ];
+            }
         }
         return response()->json($return);
     }
