@@ -102,7 +102,7 @@ window.ministeringHelper = function () {
     		
     		let ah = css.activeHousehold;
     		let $ah = $(ah.container);
-    		$ah.atrr('data-activeid', householdData.id);
+    		$ah.attr('data-activeid', householdData.id);
     		$(ah.household.name, $ah).html(householdData.last_name);
     		$(ah.household.husband, $ah).html(householdData.husbandName);
     		$(ah.household.wife, $ah).html(householdData.wifeName);
@@ -204,10 +204,10 @@ window.ministeringHelper = function () {
     		});
     	},
     	'replaceHouseholdData' : function(hData) {
-    		let householdKey = data.households.findIndex(function(household) {
+    		let householdKey = _.findIndex(data.households, function(household) {
                 return (household.id === hData.id);
             });
-            
+
             data.households[householdKey] = hData;
     	}, 
     	'removeActiveVisiting' : function() {

@@ -162,9 +162,6 @@ window.householdsHelper = function () {
             let wantedHousehold = _.find(data.households, function(household) {
                 return (household.id === parseInt(functions.getDataAttr('currentHouseholdId')))
             });
-            // let householdKey = data.households.filter(function(household) {
-            //     return (household.id === parseInt(functions.getDataAttr('currentHouseholdId')));
-            // });
 
             wantedHousehold['comments'] = hComments;
         }, 
