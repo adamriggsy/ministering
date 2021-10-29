@@ -65,8 +65,6 @@ export const commentsHelper = function () {
                 container.html('<p>' + emptyMessage + '</p>');
             }else {
     		    $.each(comments, function(index, comment) {
-                    console.log(comment);
-                    console.log(template);
                     let author = comment.author;
 
                     if(typeof author === 'undefined') {

@@ -18,4 +18,30 @@
             &nbsp;
         @endif
     </td>
+    <td class="assignedStatus">
+        <div class="d-flex">
+            @if(!empty($household->ministeringSister))
+                @if($household->ministeredByStatus === 'approved')
+                    <i class="bi bi-check-circle-fill text-success"></i>
+                @elseif($household->ministeredByStatus === 'rejected')
+                    <i class="bi bi-x-circle-fill text-danger"></i>
+                @else
+                    <i class="bi bi-dash-circle-fill text-black-50"></i>
+                @endif
+
+                @if($user->canManage)
+                    @if(
+                        !is_null($household->ministeredByAssignment()->first()) &&
+                        $aCount = $household->ministeredByAssignment->first()->comments->count() > 0
+                    )
+                        <button class='assignmentComments' data-bs-toggle="modal" data-bs-target="#assignmentFeedbackModal">
+                            <i class="bi bi-chat-right-fill text-lg d-flex flex-column">
+                                <span class="count">{{$aCount}}</span>
+                            </i>
+                        </button>
+                    @endif
+                @endif
+            @endif
+        </div>
+    </td>
 </tr>

@@ -24,6 +24,7 @@ class Households extends Model
 	protected $appends = [
 		'ministeringSister',
 		'ministeringBrother',
+        'ministeredByStatus',
 		'ministerTo',
 		'husbandName',
 		'wifeName',
@@ -52,6 +53,10 @@ class Households extends Model
         }
 
         return $households;
+    }
+
+    public function ministeredByAssignment() {
+        return $this->hasMany(MinisterTo::class, 'household_id');
     }
 
 	public function husband() {
@@ -96,6 +101,10 @@ class Households extends Model
     	$brother = $this->ministeredBy()->where('gender', '=', 'M')->first();
 
     	return is_null($brother) ? '' : $brother->name . ' ' . $brother->last_name;
+    }
+
+    public function getMinisteredByStatusAttribute() {
+        return $this->ministeredByAssignment->first()->status ?? 'N/A';
     }
 
     public function getMinisterToAttribute() {

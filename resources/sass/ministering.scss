@@ -2,6 +2,8 @@
 @import '_comment.scss';
 @import '_variables.scss';
 @import '_ticker.scss';
+@import '_comment-icon.scss';
+@import '_modal-assignment-feedback.scss';
 
 #households {
     flex-wrap: wrap;
@@ -11,6 +13,21 @@
 
         .individual {
             margin-left: 20px;
+        }
+
+        .assignedStatus {
+            text-align: center;
+
+            .assignmentComments {
+                background-color: unset;
+            }
+
+            i.bi-chat-right-fill {
+                @include commentIcon();
+
+                margin-top: 0;
+                margin-left: 10px;
+            }
         }
     }
 }

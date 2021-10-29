@@ -1,0 +1,43 @@
+#assignmentFeedbackModal {
+	&.approved {
+		.modal-header {
+			background-color: $green;
+			
+			.modal-title {
+				color: $white;
+			}
+		}
+
+		#assignStatus {
+			color: $green;
+		}
+	}
+
+	&.rejected {
+		.modal-header {
+			background-color: $red;
+			
+			.modal-title {
+				color: $white;
+			}
+		}
+
+		#assignStatus {
+			color: $red;
+		}
+	}
+
+	#feedbackHousehold {
+		margin-bottom: 15px;	
+	}
+
+	#aFeedbackContainer {
+		width: 100%;
+		margin: 10px auto;
+		
+		.houseComment {
+			@include comment;
+		}
+
+	}
+}

@@ -108,8 +108,7 @@ window.approvalHelper = function () {
                 data: {},
                 success: function(response) {
                     if(response.saved) {
-                        $(css.household.status, container).html(response.status),
-                        console.log($(css.household.container, container));
+                        $(css.household.status, container).html(response.status);
                         $(container).removeClass().addClass('household ' + response.status);
                         functions.handleBtnGroup(container);
                     } else {

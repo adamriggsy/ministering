@@ -66,6 +66,7 @@
                                 <th>Brother Assigned</th>
                                 <th>Ministering To</th>
                                 <th data-priority="3"></th>
+                                <th data-priority="4">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,12 +79,13 @@
             </div>
         </div>
     </div>
-    <div id="unassignedTicker" class="ticker-wrap">
+    {{-- <div id="unassignedTicker" class="ticker-wrap">
         <i id="tickerClose" class="ticker-close bi bi-x-circle text-lg"></i>
         <div class='ticker'>
             
         </div>
-    </div>
+    </div> --}}
+    @include('includes.modals.assignment_feedback')
 @endsection
 
 @section('page_scripts')

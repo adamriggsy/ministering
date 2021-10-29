@@ -102,7 +102,7 @@ window.ministeringHelper = function () {
     		
     		let ah = css.activeHousehold;
     		let $ah = $(ah.container);
-    		$ah.data('activeid', householdData.id);
+    		$ah.atrr('data-activeid', householdData.id);
     		$(ah.household.name, $ah).html(householdData.last_name);
     		$(ah.household.husband, $ah).html(householdData.husbandName);
     		$(ah.household.wife, $ah).html(householdData.wifeName);
@@ -302,6 +302,11 @@ window.ministeringHelper = function () {
                         "orderable": false,
                         "width": '14%'
                     },
+                    {
+                        "targets": 8,
+                        "orderable": false,
+                        "width": '5%'
+                    },
                 ]
             });
     	}, 
@@ -409,6 +414,35 @@ window.ministeringHelper = function () {
 
     $(document).on('click touch', '#tickerClose', function() {
         $(css.ticker.mainContainer).remove();
+    });
+
+    $(document).on('show.bs.modal', '#assignmentFeedbackModal', function(e) {
+        let btn = $(e.relatedTarget);
+        let parent = btn.closest('.household');
+        let modal = $(this);
+        let householdData = functions.getHouseholdById(parent.data('householdid'));
+        let assignmentComments = [];
+
+        modal
+            .removeClass('approved rejected proposed')
+            .addClass(householdData.ministeredByStatus);
+
+
+        _.each(householdData.ministered_by_assignment, function(assignment){
+            _.each(assignment.comments, function(comment){
+                assignmentComments.push(comment);
+            });
+        });
+
+        $("#assignStatus", modal).html(_.upperFirst(householdData.ministeredByStatus));
+        $(".householdName", modal).html(householdData.fullHouseholdName);
+        $(".assignedNames", modal).html(householdData.ministeringBrother + ' & ' + householdData.ministeringSister);
+
+        commentsHelper.functions.buildComments(
+            commentsHelper.functions.getDataAttr('commentTemplate'),
+            $("#aFeedbackContainer", modal),
+            assignmentComments
+        );
     });
 
     return {

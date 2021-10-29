@@ -19,7 +19,9 @@ class AssignmentController extends BaseController
         $combined = [];
 
         foreach($assignments as $assignment) {
-            $combined[$assignment->household_id]['assignment'] = $assignment;
+            if(empty($combined[$assignment->household_id]['assignment'])) {
+                $combined[$assignment->household_id]['assignment'] = $assignment;
+            }
             $combined[$assignment->household_id]['individuals'][] = $assignment->individual;
         }
 

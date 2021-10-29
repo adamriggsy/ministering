@@ -71,10 +71,6 @@
     <script>
         $(document).ready(function(){
             $('#timezone').val(_moment.tz.guess());
-
-            // console.log(_moment);
-            // console.log(_moment.tz('America/Los_Angeles'));
-            // console.log(_moment.tz.guess());
         });
     </script>
 @endsection

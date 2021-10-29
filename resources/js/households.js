@@ -117,8 +117,9 @@ window.householdsHelper = function () {
                 );
 
                 let activeContainer = functions.getActiveContainerById(functions.getDataAttr('currentHouseholdId'));
+                
                 commentsHelper.functions.buildComments(
-                    commentsHelper.functions.getDataAttr('commentTemplate'),
+                    commentsHelper.functions.getDataAttr('commentCardTemplate'),
                     activeContainer.find(css.household.comments),
                     response.comments,
                     'No comments yet.'
@@ -133,6 +134,7 @@ window.householdsHelper = function () {
                 }
 
                 functions.handleBtnGroup(activeContainer.find(css.comments.buttons));
+
                 $(css.modals.comment).modal('hide');
             } else {
                 commentsHelper.functions.setCommentError(
@@ -157,11 +159,14 @@ window.householdsHelper = function () {
             );
         },
         'replaceHouseholdComments' : function(hComments) {
-            let householdKey = data.households.findIndex(function(household) {
-                return (household.id === parseInt(functions.getDataAttr('currentHouseholdId')));
+            let wantedHousehold = _.find(data.households, function(household) {
+                return (household.id === parseInt(functions.getDataAttr('currentHouseholdId')))
             });
+            // let householdKey = data.households.filter(function(household) {
+            //     return (household.id === parseInt(functions.getDataAttr('currentHouseholdId')));
+            // });
 
-            data.households[householdKey]['comments'] = hComments;
+            wantedHousehold['comments'] = hComments;
         }, 
         'getHouseholdById' : function(id) {
             return data.households[id];
@@ -178,7 +183,6 @@ window.householdsHelper = function () {
         'setAutocomplete' : function() {
             $("#householdSearch").html('').append('<input type="text" class="form-control form-control-lg" id="searchHouseholds" placeholder="Find a household..." autocomplete="off">');
             functions.setDataAttr('ac', false);
-
 
             const field = document.getElementById('searchHouseholds');
             let ac = new Autocomplete(field, {
@@ -205,7 +209,7 @@ window.householdsHelper = function () {
             let countClass = hData.comments.length > functions.getDataAttr('maxCommentsShown') ? 'showAllCommentsBtn' : '';
 
             hContainer.removeClass().addClass('household ' + countClass);
-            hContainer.data('householdid', hData.household.id);
+            hContainer.attr('data-householdid', hData.household.id);
             $(css.household.name, hContainer).text(hData.household.fullHouseholdName);
             $(css.household.count, hContainer).text(hData.comments.length);
 

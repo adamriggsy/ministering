@@ -2,6 +2,7 @@
 @import '_comment.scss';
 @import '_variables.scss';
 @import '_modal-household.scss';
+@import '_comment-icon.scss';
 
 h1 {
 	text-align: center;
@@ -196,7 +197,6 @@ h1 {
 			text-align: left;
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: space-between;
 
 			> p {
 				text-align: center;
@@ -257,17 +257,7 @@ h1 {
 			}
 
 			i {
-				width: auto;
-				margin-top: 8px;
-
-				.count {
-					align-self: center;
-				    margin-top: -20px;
-				    margin-right: 2px;
-				    color: #fff;
-				    font-size: 11px;
-				    font-weight: bold;
-				}
+				@include commentIcon();
 			}
 		}
 
