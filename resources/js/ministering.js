@@ -136,12 +136,12 @@ window.ministeringHelper = function () {
 			
 			// // $("#assignHousehold").val('');
    //  	},
-   //  	'getHouseholdById' : function(id) {
-   //  		let filteredHouseholds = data.households.filter(function(household) {
-   //              return (household.id === id);
-   //          });
-   //          return filteredHouseholds[0];
-   //  	},
+    	'getHouseholdById' : function(id) {
+    		let filteredHouseholds = data.households.filter(function(household) {
+                return (household.id === id);
+            });
+            return filteredHouseholds[0];
+    	},
    //  	'getUnassignedHouseholds' : function() {
    //  		$.getJSON('/api/households/unassigned', function( response ) {
 			// 	functions.setDataAttr('unassignedHouseholds', response);

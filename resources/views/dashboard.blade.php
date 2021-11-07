@@ -13,7 +13,7 @@
                     <a href="{{ route('all-households') }}" class="btn btn-outline-dark btn-light">View Households</a>
                 @endif
 
-                <a href="{{ route('ward-list') }}" class="btn btn-outline-dark btn-light">Manage Assignments</a>
+                <a href="{{ route('manage-assignments') }}" class="btn btn-outline-dark btn-light">Manage Assignments</a>
 
                 @if(Auth::user()->canApprove)
                     <a href="{{ route('approve-assignments') }}" class="btn btn-outline-dark btn-light">Approve Assignments</a>
