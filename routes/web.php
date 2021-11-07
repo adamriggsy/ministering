@@ -22,6 +22,7 @@ use App\Http\Controllers\MinisterToController;
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/', [Controller::class, 'wardList'])->name('ward-list');
+	Route::get('/manage-assignments', [AssignmentController::class, 'manageAssignments'])->name('manage-assignments');
 	Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
 	
 
@@ -38,16 +39,17 @@ Route::middleware(['auth'])->group(function () {
 
 
 	Route::get('/households', [HouseholdController::class, 'allHouseholds'])->name('all-households');
+	Route::get('/api/households', [HouseholdController::class, 'households']);
 	Route::get('/api/households/unassigned', [HouseholdController::class, 'unassigned']);
 	Route::get('/api/household/{household}', [HouseholdController::class, 'getHousehold']);
 	Route::get('/api/household/{household}/comments', [HouseholdController::class, 'getHouseholdComments']);
 	Route::post('/api/household/{household}/comments/create', [HouseholdController::class, 'createHouseholdComment']);
 
 
-	Route::post('/api/minister-to/{ministerTo}/comments/create', [MinisterToController::class, 'createMinisterToComment']);
-	Route::post('/api/minister-to/household/{id}/accept', [MinisterToController::class, 'ministerToAccept']);
-	Route::post('/api/minister-to/household/{id}/propose', [MinisterToController::class, 'ministerToPropose']);
-	Route::post('/api/minister-to/household/{id}/reject', [MinisterToController::class, 'ministerToReject']);
+	Route::post('/api/assignment/{assignment}/comments/create', [AssignmentController::class, 'createAssignmentComment']);
+	Route::post('/api/assignment/{id}/accept', [AssignmentController::class, 'assignmentToAccept']);
+	Route::post('/api/assignment/{id}/propose', [AssignmentController::class, 'assignmentToPropose']);
+	Route::post('/api/assignment/{id}/reject', [AssignmentController::class, 'assignmentToReject']);
 
 });
 

@@ -7,8 +7,7 @@ window.ministeringHelper = function () {
     	'households' : null,
     	'unassignedHouseholds': false,
     	'activeHousehold': null,
-    	'ac': false,
-        'tickerTemplate': null
+    	'ac': false
     };
 
     let css = {
@@ -51,11 +50,7 @@ window.ministeringHelper = function () {
     		'minSis' : '.hh_ministeringSis',
     		'minBro' : '.hh_ministeringBro',
     		'minTo' : '.hh_ministeringTo'
-    	},
-        'ticker' : {
-            'mainContainer': '#unassignedTicker',
-            'container' : '#unassignedTicker .ticker'
-        }
+    	}
     };
 
     const commentTemplate = function commentTemplate(id, body, authorName, commentDate ) {
@@ -67,12 +62,6 @@ window.ministeringHelper = function () {
         `;
     };
 
-    const tickerTemplate = function tickerTemplate(content) {
-        return `
-            <div class="ticker__item">${content}</div>
-        `;
-    }
-
     let functions = {
     	'init' : function(households) {
     		$.ajaxSetup({
@@ -82,8 +71,6 @@ window.ministeringHelper = function () {
 			});
 
     		functions.setDataAttr('households', households);
-            functions.setDataAttr('tickerTemplate', tickerTemplate);
-    		functions.getUnassignedHouseholds();
             commentsHelper.functions.init();
             commentsHelper.functions.setDataAttr('commentTemplate', commentTemplate);
     	},
@@ -96,166 +83,165 @@ window.ministeringHelper = function () {
     	'getAllData' : function() {
     		return data;
     	},
-    	'workOnHousehold' : function(householdEl) {
-    		let householdData = functions.getHouseholdById(householdEl.data('householdid'));
-    		functions.setDataAttr('activeHousehold', householdData);
+   //  	'workOnHousehold' : function(householdEl) {
+   //  		let householdData = functions.getHouseholdById(householdEl.data('householdid'));
+   //  		functions.setDataAttr('activeHousehold', householdData);
     		
-    		let ah = css.activeHousehold;
-    		let $ah = $(ah.container);
-    		$ah.attr('data-activeid', householdData.id);
-    		$(ah.household.name, $ah).html(householdData.last_name);
-    		$(ah.household.husband, $ah).html(householdData.husbandName);
-    		$(ah.household.wife, $ah).html(householdData.wifeName);
+   //  		let ah = css.activeHousehold;
+   //  		let $ah = $(ah.container);
+   //  		$ah.attr('data-activeid', householdData.id);
+   //  		$(ah.household.name, $ah).html(householdData.last_name);
+   //  		$(ah.household.husband, $ah).html(householdData.husbandName);
+   //  		$(ah.household.wife, $ah).html(householdData.wifeName);
 
-    		$(ah.household.minTo, $ah).html('');
-    		$.each(householdData.ministerTo, function(key, val) {
-    			$(ah.household.minTo, $ah).append(
-    				'<p class="minToHouse" data-householdid="' + key + '">' 
-    				+ val 
-    				+ '<i class="removeAssigned bi-x-circle small text-danger"></i>'
-    				+ '</p>'
-				);
-    		});
+   //  		$(ah.household.minTo, $ah).html('');
+   //  		$.each(householdData.ministerTo, function(key, val) {
+   //  			$(ah.household.minTo, $ah).append(
+   //  				'<p class="minToHouse" data-householdid="' + key + '">' 
+   //  				+ val 
+   //  				+ '<i class="removeAssigned bi-x-circle small text-danger"></i>'
+   //  				+ '</p>'
+			// 	);
+   //  		});
 
-    		$(ah.household.assignedReceive).children().remove();
-    		if(householdData.ministeringBrother !== '') {
-    			$(ah.household.assignedReceive).append('<p>' + householdData.ministeringBrother + '</p>');
-    		}
-    		if(householdData.ministeringSister !== '') {
-    			$(ah.household.assignedReceive).append('<p>' + householdData.ministeringSister + '</p>');
-    		}
+   //  		$(ah.household.assignedReceive).children().remove();
+   //  		if(householdData.ministeringBrother !== '') {
+   //  			$(ah.household.assignedReceive).append('<p>' + householdData.ministeringBrother + '</p>');
+   //  		}
+   //  		if(householdData.ministeringSister !== '') {
+   //  			$(ah.household.assignedReceive).append('<p>' + householdData.ministeringSister + '</p>');
+   //  		}
 
-    		$(css.activeHousehold.container).removeClass('d-none');
+   //  		$(css.activeHousehold.container).removeClass('d-none');
 
-    		functions.getHouseholdComments();
-    	},
-    	'setAutocomplete' : function() {
-			$("#assignHouseholdContainer").html('').append('<input type="text" class="form-control" id="assignHousehold" placeholder="Start typing..." autocomplete="off">');
-			functions.setDataAttr('ac', false);
+   //  		functions.getHouseholdComments();
+   //  	},
+   //  	'setAutocomplete' : function() {
+			// $("#assignHouseholdContainer").html('').append('<input type="text" class="form-control" id="assignHousehold" placeholder="Start typing..." autocomplete="off">');
+			// functions.setDataAttr('ac', false);
 
 
-			const field = document.getElementById('assignHousehold');
-		    let ac = new Autocomplete(field, {
-		        data: ministeringHelper.functions.getDataAttr('unassignedHouseholds'),
-		        maximumItems: 10,
-		        treshold: 1,
-		        highlightTyped: false,
-		        onSelectItem: ({label, value}) => {
-		            functions.assignHousehold(value);
-		        }
-		    });
+			// const field = document.getElementById('assignHousehold');
+		 //    let ac = new Autocomplete(field, {
+		 //        data: ministeringHelper.functions.getDataAttr('unassignedHouseholds'),
+		 //        maximumItems: 10,
+		 //        treshold: 1,
+		 //        highlightTyped: false,
+		 //        onSelectItem: ({label, value}) => {
+		 //            functions.assignHousehold(value);
+		 //        }
+		 //    });
 
-		    functions.setDataAttr('ac', ac);
+		 //    functions.setDataAttr('ac', ac);
 			
-			// $("#assignHousehold").val('');
-    	},
-    	'getHouseholdById' : function(id) {
-    		let filteredHouseholds = data.households.filter(function(household) {
-                return (household.id === id);
-            });
-            return filteredHouseholds[0];
-    	},
-    	'getUnassignedHouseholds' : function() {
-    		$.getJSON('/api/households/unassigned', function( response ) {
-				functions.setDataAttr('unassignedHouseholds', response);
-				functions.setDataAttr('ac', false);
-				functions.setAutocomplete();
-                functions.updateTicker();
-			});
-    	},
-    	'assignHousehold' : function(assignedId) {
-    		let activeHousehold = functions.getDataAttr('activeHousehold');
+			// // $("#assignHousehold").val('');
+   //  	},
+   //  	'getHouseholdById' : function(id) {
+   //  		let filteredHouseholds = data.households.filter(function(household) {
+   //              return (household.id === id);
+   //          });
+   //          return filteredHouseholds[0];
+   //  	},
+   //  	'getUnassignedHouseholds' : function() {
+   //  		$.getJSON('/api/households/unassigned', function( response ) {
+			// 	functions.setDataAttr('unassignedHouseholds', response);
+			// 	functions.setDataAttr('ac', false);
+			// 	functions.setAutocomplete();
+			// });
+   //  	},
+   //  	'assignHousehold' : function(assignedId) {
+   //  		let activeHousehold = functions.getDataAttr('activeHousehold');
 
-    		$.ajax({
-                url: '/api/assign',
-                type: 'post',
-                data: {
-                	householdId: activeHousehold.id,
-                    assignedId: assignedId
-                },
-                success: function(response) {
-                    functions.updateHouseholds(response.household);
-                    functions.updateHouseholds(response.assignedHousehold);
+   //  		$.ajax({
+   //              url: '/api/assign',
+   //              type: 'post',
+   //              data: {
+   //              	householdId: activeHousehold.id,
+   //                  assignedId: assignedId
+   //              },
+   //              success: function(response) {
+   //                  functions.updateHouseholds(response.household);
+   //                  functions.updateHouseholds(response.assignedHousehold);
 
-                    $(css.activeHousehold.household.minTo).append(
-						'<p class="minToHouse" data-householdid="' + response.assignedHousehold.id + '">' 
-	    				+ response.assignedHousehold.householdName 
-	    				+ '<i class="removeAssigned bi-x-circle small text-danger"></i>'
-	    				+ '</p>'
-                	);
+   //                  $(css.activeHousehold.household.minTo).append(
+			// 			'<p class="minToHouse" data-householdid="' + response.assignedHousehold.id + '">' 
+	  //   				+ response.assignedHousehold.householdName 
+	  //   				+ '<i class="removeAssigned bi-x-circle small text-danger"></i>'
+	  //   				+ '</p>'
+   //              	);
 
-                    $("#assignHousehold").val('');
-                    functions.getUnassignedHouseholds();
-                    functions.resetDataTable();
-                }
-            });
-    	},
-    	'updateHouseholds' : function(household) {
-    		functions.replaceHouseholdData(household);
+   //                  $("#assignHousehold").val('');
+   //                  functions.getUnassignedHouseholds();
+   //                  functions.resetDataTable();
+   //              }
+   //          });
+   //  	},
+   //  	'updateHouseholds' : function(household) {
+   //  		functions.replaceHouseholdData(household);
 
-    		let row = $(".household[data-householdid='" + household.id + "']");
+   //  		let row = $(".household[data-householdid='" + household.id + "']");
 
-    		$(css.household.minSis, row).html(household.ministeringSister);
-    		$(css.household.minBro, row).html(household.ministeringBrother);
+   //  		$(css.household.minSis, row).html(household.ministeringSister);
+   //  		$(css.household.minBro, row).html(household.ministeringBrother);
 
-    		$(css.household.minTo, row).html('');
-    		$.each(household.ministerTo, function(key, val) {
-    			$(css.household.minTo, row).append('<p>' + val + '</p>');
-    		});
-    	},
-    	'replaceHouseholdData' : function(hData) {
-    		let householdKey = _.findIndex(data.households, function(household) {
-                return (household.id === hData.id);
-            });
+   //  		$(css.household.minTo, row).html('');
+   //  		$.each(household.ministerTo, function(key, val) {
+   //  			$(css.household.minTo, row).append('<p>' + val + '</p>');
+   //  		});
+   //  	},
+   //  	'replaceHouseholdData' : function(hData) {
+   //  		let householdKey = _.findIndex(data.households, function(household) {
+   //              return (household.id === hData.id);
+   //          });
 
-            data.households[householdKey] = hData;
-    	}, 
-    	'removeActiveVisiting' : function() {
-    		let activeHousehold = functions.getDataAttr('activeHousehold');
+   //          data.households[householdKey] = hData;
+   //  	}, 
+   //  	'removeActiveVisiting' : function() {
+   //  		let activeHousehold = functions.getDataAttr('activeHousehold');
 
-    		if($(css.activeHousehold.household.assignedReceive).children().length > 0) {
-	    		$.ajax({
-	                url: '/api/remove-visiting',
-	                type: 'post',
-	                data: {
-	                	householdId: activeHousehold.id
-	                },
-	                success: function(response) {
-	                    functions.updateHouseholds(response.household);
-	                    functions.updateHouseholds(response.otherHousehold);
+   //  		if($(css.activeHousehold.household.assignedReceive).children().length > 0) {
+	  //   		$.ajax({
+	  //               url: '/api/remove-visiting',
+	  //               type: 'post',
+	  //               data: {
+	  //               	householdId: activeHousehold.id
+	  //               },
+	  //               success: function(response) {
+	  //                   functions.updateHouseholds(response.household);
+	  //                   functions.updateHouseholds(response.otherHousehold);
 
-	                    $(css.activeHousehold.household.assignedReceive).html('');
+	  //                   $(css.activeHousehold.household.assignedReceive).html('');
 
-	                    $("#assignHousehold").val('');
-	                    functions.getUnassignedHouseholds();
-	                    functions.resetDataTable();
-	                }
-	            });
-	    	}
-    	},
-    	'removeAssignedMinTo' : function(clickedEl) {
-    		let assignedId = clickedEl.data('householdid');
-    		let activeHousehold = functions.getDataAttr('activeHousehold');
+	  //                   $("#assignHousehold").val('');
+	  //                   functions.getUnassignedHouseholds();
+	  //                   functions.resetDataTable();
+	  //               }
+	  //           });
+	  //   	}
+   //  	},
+   //  	'removeAssignedMinTo' : function(clickedEl) {
+   //  		let assignedId = clickedEl.data('householdid');
+   //  		let activeHousehold = functions.getDataAttr('activeHousehold');
 
-    		$.ajax({
-                url: '/api/remove-assigned',
-                type: 'post',
-                data: {
-                	householdId: activeHousehold.id,
-                	assignedId: assignedId
-                },
-                success: function(response) {
-                    functions.updateHouseholds(response.household);
-                    functions.updateHouseholds(response.otherHousehold);
+   //  		$.ajax({
+   //              url: '/api/remove-assigned',
+   //              type: 'post',
+   //              data: {
+   //              	householdId: activeHousehold.id,
+   //              	assignedId: assignedId
+   //              },
+   //              success: function(response) {
+   //                  functions.updateHouseholds(response.household);
+   //                  functions.updateHouseholds(response.otherHousehold);
 
-                    $(css.activeHousehold.household.minTo + " .minToHouse[data-householdid='" + assignedId + "']").remove();
+   //                  $(css.activeHousehold.household.minTo + " .minToHouse[data-householdid='" + assignedId + "']").remove();
 
-                    $("#assignHousehold").val('');
-                    functions.getUnassignedHouseholds();
-                    functions.resetDataTable();
-                }
-            });
-    	},
+   //                  $("#assignHousehold").val('');
+   //                  functions.getUnassignedHouseholds();
+   //                  functions.resetDataTable();
+   //              }
+   //          });
+   //  	},
     	'resetDataTable' : function() {
     		if ( $.fn.dataTable.isDataTable('#allHouseholdsTable') ) {
 				$('#allHouseholdsTable').DataTable().destroy();
@@ -294,16 +280,6 @@ window.ministeringHelper = function () {
                     },
                     {
                         "targets": 6,
-                        "orderable": false,
-                        "width": '14%'
-                    },
-                    {
-                        "targets": 7,
-                        "orderable": false,
-                        "width": '14%'
-                    },
-                    {
-                        "targets": 8,
                         "orderable": false,
                         "width": '5%'
                     },
@@ -366,39 +342,27 @@ window.ministeringHelper = function () {
                     'Could not save your comment. Refresh the page and try again.'
                 );
             }
-        },
-    	'updateTicker' : function() {
-            let unassignedHouseholds = _.clone(functions.getDataAttr('unassignedHouseholds'));
-
-            let shuffled = _.shuffle(_.shuffle(unassignedHouseholds));
-
-            $(css.ticker.container).html('');
-            $(css.ticker.container).append(data.tickerTemplate('Unassigned Households: '));
-
-            $.each(_.slice(shuffled,0,50), function(key, household) {
-                $(css.ticker.container).append(data.tickerTemplate(household.label));
-            });
         }
     };
 
-    $(document).on('click touch', '.assignHousehold', function() {
-    	functions.workOnHousehold($(this).closest(css.household.container));
-    	$([document.documentElement, document.body]).animate({
-	        scrollTop: $(css.activeHousehold.container).offset().top
-	    }, 1000);
-    });
+    // $(document).on('click touch', '.assignHousehold', function() {
+    // 	functions.workOnHousehold($(this).closest(css.household.container));
+    // 	$([document.documentElement, document.body]).animate({
+	   //      scrollTop: $(css.activeHousehold.container).offset().top
+	   //  }, 1000);
+    // });
 
-    $(document).on('click touch', '.removeVisiting', function() {
-    	functions.removeActiveVisiting();
-    });
+    // $(document).on('click touch', '.removeVisiting', function() {
+    // 	functions.removeActiveVisiting();
+    // });
 
-    $(document).on('click touch', '.removeAssigned', function() {
-    	functions.removeAssignedMinTo($(this).closest('.minToHouse'));
-    });
+    // $(document).on('click touch', '.removeAssigned', function() {
+    // 	functions.removeAssignedMinTo($(this).closest('.minToHouse'));
+    // });
 
-    $(document).on('click touch', '#activeClose', function() {
-    	$(css.activeHousehold.container).addClass('d-none');
-    });
+    // $(document).on('click touch', '#activeClose', function() {
+    // 	$(css.activeHousehold.container).addClass('d-none');
+    // });
 
 	$(document).on('click touch', '#commentSubmit', function(e) {
 		e.preventDefault();
@@ -412,10 +376,6 @@ window.ministeringHelper = function () {
         );
     });
 
-    $(document).on('click touch', '#tickerClose', function() {
-        $(css.ticker.mainContainer).remove();
-    });
-
     $(document).on('show.bs.modal', '#assignmentFeedbackModal', function(e) {
         let btn = $(e.relatedTarget);
         let parent = btn.closest('.household');
@@ -427,16 +387,14 @@ window.ministeringHelper = function () {
             .removeClass('approved rejected proposed')
             .addClass(householdData.ministeredByStatus);
 
-
-        _.each(householdData.ministered_by_assignment, function(assignment){
-            _.each(assignment.comments, function(comment){
-                assignmentComments.push(comment);
-            });
+        _.each(householdData.ministered_by.comments, function(comment){
+            console.log(comment);
+            assignmentComments.push(comment);
         });
-
+    
         $("#assignStatus", modal).html(_.upperFirst(householdData.ministeredByStatus));
         $(".householdName", modal).html(householdData.fullHouseholdName);
-        $(".assignedNames", modal).html(householdData.ministeringBrother + ' & ' + householdData.ministeringSister);
+        $(".assignedNames", modal).html(householdData.ministeringComp1 + ' & ' + householdData.ministeringComp2);
 
         commentsHelper.functions.buildComments(
             commentsHelper.functions.getDataAttr('commentTemplate'),

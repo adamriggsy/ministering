@@ -21,26 +21,23 @@
                 </ul>
             </div>
             <div id='assignmentContainer' class='ajr-list'>
-                @foreach ($assignments as $key => $ag) 
+                @foreach ($assignments as $key => $assignment) 
                     <div 
-                        class='household {{ $ag['assignment']->status }}' 
-                        data-ministerid='{{ $ag['assignment']->id }}'
-                        data-householdid='{{ $ag['assignment']->household_id }}'
+                        class='household {{ $assignment->status }}' 
+                        data-assignmentid='{{ $assignment->id }}'
+                        data-householdid='{{ $assignment->household_id }}'
                     >
                         <div class="infoContainer">
                             <div class="householdContainer">
-                                <h2 class="householdName">{{ $ag['assignment']->household->fullHouseholdName }}</h2>
-                                <h4 class="status">{{ ucfirst($ag['assignment']->status) }}</h4>
+                                <h2 class="householdName">{{ $assignment->household()->fullHouseholdName }}</h2>
+                                <h4 class="status">{{ ucfirst($assignment->status) }}</h4>
                             </div>
                             
                             <div class="assignedApprovalContainer">
                                 <h3>To be ministered by:</h3>
                                 <div class="assignedContainer">
-                                    @foreach($ag['individuals'] as $individual)
-                                        @if(!is_null($individual))
-                                            <p>{{$individual->name}} {{$individual->last_name}}</p>
-                                        @endif
-                                    @endforeach
+                                    <p>{{$assignment->companionship()->firstCompanion->name}} {{$assignment->companionship()->firstCompanion->last_name}}</p>
+                                    <p>{{$assignment->companionship()->secondCompanion->name}} {{$assignment->companionship()->secondCompanion->last_name}}</p>
                                 </div>
                                 
                                 <div class="statusError text-danger"></div>
@@ -56,7 +53,7 @@
                         <div class='feedbackContainer'>
                             <h3>Feedback</h3>
                             <div class='allComments'>
-                                @forelse($ag['assignment']->comments->sortByDesc('created_at') as $comment)
+                                @forelse($assignment->comments->sortByDesc('created_at') as $comment)
                                     <div class='ministeringComment' data-commentid="{{ $comment->id }}">
                                         <author>
                                             {{ $comment->author->name }} - {{ $comment->updated_at->timezone(Session::get('user_timezone', 'America/Denver'))->format('Y-m-d h:i A')}}
@@ -90,12 +87,14 @@
             modal.find('.householdName').text(parent.find('.householdName').text());
             modal.find('.assignedContainer').html(parent.find('.assignedContainer').html());
             
-            $("#ministerId").remove();
+            $("#assignmentId").remove();
+            console.log(parent);
+            console.log(parent.data('assignmentid'));
             $("<input>").attr({
-                name: "ministerId",
-                id: "ministerId",
+                name: "assignmentId",
+                id: "assignmentId",
                 type: "hidden",
-                value: parent.data('ministerid')
+                value: parent.data('assignmentid')
             }).appendTo(form);
         });
 

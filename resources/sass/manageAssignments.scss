@@ -1,0 +1,158 @@
+@import '_overflow-shadows.scss';
+@import '_comment.scss';
+@import '_variables.scss';
+@import '_ticker.scss';
+@import '_comment-icon.scss';
+@import '_modal-assignment-feedback.scss';
+
+#companionships {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+    .companionship {
+        width: 33%;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid $grey;
+
+        .individuals {
+            width:100%;
+            padding-right: 20px;
+            margin-bottom: 10px;
+
+            h4 {
+                color: $grey;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+            }
+
+            .individual {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+
+        .assignments {
+            margin-bottom: 20px;
+            width:100%;
+
+            .household {
+                padding-left: 20px;
+            }
+        }
+    }
+}
+
+#activeCompanionship {
+    position: relative;
+    // display: grid;
+    // grid-template-columns: 1fr 2fr 5fr;
+    // grid-gap: 50px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #000;
+
+    #ministeringInfo {
+        margin-top: 20px;
+
+        .removeVisiting {
+            font-size: 14px;
+        }
+    }
+
+    #companionshipComments {
+        .nav-tabs {
+            .nav-item {
+                text-align: center;
+                margin-right: 0;
+                margin-left: 0;
+
+                .nav-link {
+                    width: 100%;
+                    padding: .5rem;
+
+                    &.active {
+                        background-color:#666;
+                        color:#fff;
+                    }
+                }
+            }
+        }
+
+        #view {
+            padding-top: 10px;
+            
+            #commentsContainer {
+                height: 150px;
+                overflow: auto;
+                @include overflowShadows($black);
+
+                .houseComment {
+                    @include comment;
+                }
+            }
+        }
+    }
+}
+
+#assignHouseholdContainer {
+    width: 100%;
+    margin: 10px 0 5px;
+
+    .removeAssigned {
+        margin-left: 5px;
+    }
+}
+
+#activeClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.bi-x-circle {
+    cursor: pointer;
+}
+
+.removeAssigned {
+    margin-left: 5px;
+}
+
+@media (max-width:767px) {
+    #activeHousehold {
+        grid-template-columns: 100%;
+        grid-gap: 5px;
+
+        & > div {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+
+        #companionshipInfo {
+            order: 1;
+            display: flex;
+            align-items: baseline;
+        }
+
+        #companionshipInfo > * {
+            margin-right: 10px;
+        }
+
+        #assignHouseholdContainer {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
+        #ministeringInfo {
+            order: 2;
+        }
+
+        #householdComments {
+            order: 3;
+        }
+    }
+}

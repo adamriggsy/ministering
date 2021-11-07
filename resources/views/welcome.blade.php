@@ -62,10 +62,10 @@
                                 <th data-priority="1">Family</th>
                                 <th data-priority="2">Brother</th>
                                 <th>Sister</th>
-                                <th>Sister Assigned</th>
-                                <th>Brother Assigned</th>
-                                <th>Ministering To</th>
-                                <th data-priority="3"></th>
+                                <th>Companion 1</th>
+                                <th>Companion 2</th>
+                                {{-- <th>Ministering To</th> --}}
+                                {{-- <th data-priority="3"></th> --}}
                                 <th data-priority="4">Status</th>
                             </tr>
                         </thead>

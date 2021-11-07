@@ -23,6 +23,10 @@ class Individuals extends Model
         'uniqueId'
     ];
 
+    protected $appends = [
+        'fullName'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -37,8 +41,9 @@ class Individuals extends Model
      */
     protected $casts = [];
 
-    public function ministerTo() {
-        return $this->belongsToMany(Households::class, 'minister_to', 'individual_id', 'household_id');
+    public function companionships() {
+        return Companionships::where('companion_1', '=', $this->id)->orWhere('companion_2', '=', $this->id)->get();
+        // return $this->belongsToMany(Companionships::class, 'minister_to', 'individual_id', 'household_id');
     }
 
     public function household() {
@@ -47,5 +52,9 @@ class Individuals extends Model
         }
 
         return $this->belongsTo(Households::class, 'id', 'husband_id');
+    }
+
+    public function getFullNameAttribute() {
+        return $this->name . ' ' . $this->last_name;
     }
 }

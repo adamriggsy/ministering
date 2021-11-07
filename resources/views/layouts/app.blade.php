@@ -26,7 +26,11 @@
                     @endif
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('ward-list') }}">Manage Assignments</a>
+                        <a class="nav-link" href="{{ route('manage-assignments') }}">Manage Assignments</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('ward-list') }}">Ward List</a>
                     </li>
                 </ul>
 

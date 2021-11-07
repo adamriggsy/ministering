@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Assignments;
 // use App\Scopes\NotMovedScope;
 
 class Households extends Model
@@ -22,10 +23,9 @@ class Households extends Model
     ];
 
 	protected $appends = [
-		'ministeringSister',
-		'ministeringBrother',
+		'ministeringComp1',
+        'ministeringComp2',
         'ministeredByStatus',
-		'ministerTo',
 		'husbandName',
 		'wifeName',
 		'householdName',
@@ -56,7 +56,8 @@ class Households extends Model
     }
 
     public function ministeredByAssignment() {
-        return $this->hasMany(MinisterTo::class, 'household_id');
+        return $this->belongsTo(Assignments::class, 'household_id');
+        // return $this->hasMany(MinisterTo::class, 'household_id');
     }
 
 	public function husband() {
@@ -80,7 +81,9 @@ class Households extends Model
 	}
 
 	public function ministeredBy() {
-        return $this->belongsToMany(Individuals::class, 'minister_to', 'household_id', 'individual_id');
+        return $this->hasOne(Assignments::class, 'household_id');
+
+        // return $this->belongsToMany(Individuals::class, 'minister_to', 'household_id', 'individual_id');
     }
 
     public function getHusbandNameAttribute() {
@@ -91,28 +94,45 @@ class Households extends Model
     	return $this->wife()->name;
     }
 
-    public function getMinisteringSisterAttribute() {
-    	$sister = $this->ministeredBy()->where('gender', '=', 'F')->first();
+    // public function getMinisteringSisterAttribute() {
+    // 	$sister = $this->ministeredBy()->where('gender', '=', 'F')->first();
 
-    	return is_null($sister) ? '' : $sister->name . ' ' . $sister->last_name;
+    // 	return is_null($sister) ? '' : $sister->name . ' ' . $sister->last_name;
+    // }
+
+    // public function getMinisteringBrotherAttribute() {
+    // 	$brother = $this->ministeredBy()->where('gender', '=', 'M')->first();
+
+    // 	return is_null($brother) ? '' : $brother->name . ' ' . $brother->last_name;
+    // }
+
+    public function getMinisteringComp1Attribute() {
+        if(is_null($this->ministeredBy)) {
+            return '';
+        }
+
+        $individual = $this->ministeredBy->companionship()->firstCompanion;
+        
+        return is_null($individual) ? '' : $individual->name . ' ' . $individual->last_name;
     }
 
-    public function getMinisteringBrotherAttribute() {
-    	$brother = $this->ministeredBy()->where('gender', '=', 'M')->first();
+    public function getMinisteringComp2Attribute() {
+        if(is_null($this->ministeredBy)) {
+            return '';
+        }
 
-    	return is_null($brother) ? '' : $brother->name . ' ' . $brother->last_name;
+        $individual = $this->ministeredBy->companionship()->secondCompanion;
+        
+        return is_null($individual) ? '' : $individual->name . ' ' . $individual->last_name;
     }
 
     public function getMinisteredByStatusAttribute() {
-        return $this->ministeredByAssignment->first()->status ?? 'N/A';
-    }
+        // dd($this->ministeredBy);
+        if(is_null($this->ministeredBy)) {
+            return 'N/A';
+        }
 
-    public function getMinisterToAttribute() {
-    	$ministeredToHusband = $this->husband()->ministerTo->pluck('householdName', 'id')->toArray();
-    	$ministeredToWife = $this->wife()->ministerTo->pluck('householdName', 'id')->toArray();
-    	
-    	return $ministeredToHusband + $ministeredToWife;
-    	// return array_unique(array_merge($ministeredToHusband, $ministeredToWife));
+        return $this->ministeredBy->status ?? 'N/A';
     }
 
     public function getStatusAttribute() {

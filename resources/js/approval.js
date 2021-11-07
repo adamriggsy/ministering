@@ -4,7 +4,7 @@ window.approvalHelper = function () {
     'use strict';
 
     var data = {
-        'currentMinisterId': null
+        'currentAssignmentId': null
     };
 
     var css = {
@@ -61,15 +61,16 @@ window.approvalHelper = function () {
     	'getAllData' : function() {
     		return data;
     	},
-        'getActiveContainerById' : function(ministerId) {
-            return $('[data-ministerid="' + ministerId + '"] ' + css.household.comments);
+        'getActiveContainerById' : function(assignmentId) {
+            return $('[data-assignmentid="' + assignmentId + '"] ' + css.household.comments);
         },
     	'createComment' : function() {
     		const form = $(css.comments.form);
-            const ministerId = form.find('#ministerId').val();
-            functions.setDataAttr('currentMinisterId', ministerId);
+            const assignmentId = form.find('#assignmentId').val();
+            functions.setDataAttr('currentAssignmentId', assignmentId);
+
             let params = {
-                'url' : '/api/minister-to/' + ministerId + '/comments/create',
+                'url' : '/api/assignment/' + assignmentId + '/comments/create',
                 'data' : {
                     form: JSON.stringify(form.serializeArray().reduce(function(m,o){  m[o.name] = o.value; return m;}, {}))
                 },
@@ -85,7 +86,7 @@ window.approvalHelper = function () {
                 );
                 commentsHelper.functions.buildComments(
                     commentsHelper.functions.getDataAttr('commentTemplate'),
-                    functions.getActiveContainerById(functions.getDataAttr('currentMinisterId')),
+                    functions.getActiveContainerById(functions.getDataAttr('currentAssignmentId')),
                     response.comments,
                     'No feedback provided.'
                 );
@@ -99,11 +100,11 @@ window.approvalHelper = function () {
         },
     	'updateStatus' : function(btn, status) {
             let container = btn.closest(css.household.container);
-            let ministerId = container.data('ministerid');
-            let householdId = container.data('householdid');
+            let assignmentId = container.data('assignmentid');
+            // let householdId = container.data('householdid');
 
             $.ajax({
-                url: '/api/minister-to/household/' + householdId + '/' + status,
+                url: '/api/assignment/' + assignmentId + '/' + status,
                 type: 'post',
                 data: {},
                 success: function(response) {

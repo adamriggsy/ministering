@@ -34,6 +34,10 @@ class HouseholdController extends BaseController
             ->with('householdSearch', $householdSearch);
     }
 
+    public function households() {
+        return response()->json(Households::all());
+    }
+
     public function unassigned() {
         $return = [];
 

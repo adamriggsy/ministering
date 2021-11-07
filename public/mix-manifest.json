@@ -1,9 +1,11 @@
 {
-    "/js/app.js": "/js/app.js?id=facc8dfeaf2927176d9c",
-    "/js/ministering.js": "/js/ministering.js?id=73cfc91949e05b95dabf",
-    "/js/approval.js": "/js/approval.js?id=ddcb620ffa32624f399c",
+    "/js/app.js": "/js/app.js?id=0978e6545bda087705e1",
+    "/js/ministering.js": "/js/ministering.js?id=a03ccadb09f16da5800a",
+    "/js/approval.js": "/js/approval.js?id=b92bc776dd0348926a53",
     "/js/households.js": "/js/households.js?id=731df160313737975f94",
+    "/js/assignment.js": "/js/assignment.js?id=90d1262a4bf5163d46fe",
     "/css/households.css": "/css/households.css?id=ff43b9ab36979458a42d",
+    "/css/manageAssignments.css": "/css/manageAssignments.css?id=4d9eb3514aec35c970b8",
     "/css/approval.css": "/css/approval.css?id=da2929718650f0580a8e",
     "/css/ministering.css": "/css/ministering.css?id=de5bffe95e184f2d2943",
     "/css/app.css": "/css/app.css?id=d57bb1c6608b6dbd307a"
