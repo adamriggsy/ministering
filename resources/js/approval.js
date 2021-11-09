@@ -149,6 +149,14 @@ window.approvalHelper = function () {
                     $(css.mainContainer).addClass(css.viewTypes.list).removeClass(css.viewTypes.grid);
                     break;
             }
+        },
+        'filterAssignments' : function(status) {
+            $("#assignmentContainer .household").addClass('d-none');
+            $("#assignmentContainer .household." + status).removeClass('d-none');
+
+            if(status === 'all' || status === '') {
+                $("#assignmentContainer .household").removeClass('d-none');
+            }
         }
     };
 
@@ -171,7 +179,11 @@ window.approvalHelper = function () {
 
     $(document).on('click touch', '#viewChoice li', function() {
         functions.changeViewType($(this).data('viewtype'));
-    })
+    });
+
+    $(document).on('click touch', '#filterChoice li', function() {
+        functions.filterAssignments($(this).data('status'));
+    });
 
     return {
         data : functions.getAllData,

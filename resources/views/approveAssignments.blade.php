@@ -9,23 +9,39 @@
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center" style="position:relative;">
-            <h1>Assignments to be approved</h1>
-            <div id="viewChoiceContainer" class="dropdown">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    Change View Type
-                </a>
+            <div id="pageHeader">
+                <div id="filterAssignmentsContainer" class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter Assignments
+                    </a>
 
-                <ul id="viewChoice" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li class="dropdown-item" data-viewtype="list">List View</a></li>
-                    <li class="dropdown-item" data-viewtype="grid">Grid View</a></li>
-                </ul>
+                    <ul id="filterChoice" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li class="dropdown-item" data-status="all">Show All</a></li>
+                        <li class="dropdown-item" data-status="proposed">Show Proposed Only</a></li>
+                        <li class="dropdown-item" data-status="rejected">Show Rejected Only</a></li>
+                        <li class="dropdown-item" data-status="approved">Show Accepted Only</a></li>
+                    </ul>
+                </div>
+                <h1>Assignments to be approved</h1>
+                <div id="viewChoiceContainer" class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Change View Type
+                    </a>
+
+                    <ul id="viewChoice" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li class="dropdown-item" data-viewtype="list">List View</a></li>
+                        <li class="dropdown-item" data-viewtype="grid">Grid View</a></li>
+                    </ul>
+                </div>
             </div>
+
             <div id='assignmentContainer' class='ajr-list'>
                 @foreach ($assignments as $key => $assignment) 
                     <div 
                         class='household {{ $assignment->status }}' 
                         data-assignmentid='{{ $assignment->id }}'
                         data-householdid='{{ $assignment->household_id }}'
+                        data-status='{{ $assignment->status }}'
                     >
                         <div class="infoContainer">
                             <div class="householdContainer">
