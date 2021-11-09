@@ -113,8 +113,7 @@ window.assignmentHelper = function () {
 		        treshold: 1,
 		        highlightTyped: false,
 		        onSelectItem: ({label, value}) => {
-		            console.log(label, value);
-                    functions.assignHousehold(value);
+                functions.assignHousehold(value);
 		        }
 		    });
 

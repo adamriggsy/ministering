@@ -88,8 +88,6 @@
             modal.find('.assignedContainer').html(parent.find('.assignedContainer').html());
             
             $("#assignmentId").remove();
-            console.log(parent);
-            console.log(parent.data('assignmentid'));
             $("<input>").attr({
                 name: "assignmentId",
                 id: "assignmentId",

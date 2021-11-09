@@ -244,47 +244,46 @@ window.ministeringHelper = function () {
    //  	},
     	'resetDataTable' : function() {
     		if ( $.fn.dataTable.isDataTable('#allHouseholdsTable') ) {
-				$('#allHouseholdsTable').DataTable().destroy();
+  				$('#allHouseholdsTable').DataTable().destroy();
 
-			}
+  			}
 
-			$("#allHouseholdsTable").DataTable({
-                paging: false,
-                "order": [],
-                // "autoWidth": false,
-                "columns": [
-                    {
-                        "targets": 0,
-                        "orderable": false,
-                        "width": '1%'
-                    },
-                    {
-                        "targets": 1,
-                        "width": '5%'
-                    },
-                    {
-                        "targets": 2,
-                        "width": '5%'
-                    },
-                    {
-                        "targets": 3,
-                        "width": '5%'
-                    },
-                    {
-                        "targets": 4,
-                        "width": '14%'
-                    },
-                    {
-                        "targets": 5,
-                        "width": '14%'
-                    },
-                    {
-                        "targets": 6,
-                        "orderable": false,
-                        "width": '5%'
-                    },
-                ]
-            });
+  			$("#allHouseholdsTable").DataTable({
+            paging: false,
+            "order": [],
+            // "autoWidth": false,
+            "columns": [
+                {
+                    "targets": 0,
+                    "orderable": false,
+                    "width": '1%'
+                },
+                {
+                    "targets": 1,
+                    "width": '5%'
+                },
+                {
+                    "targets": 2,
+                    "width": '5%'
+                },
+                {
+                    "targets": 3,
+                    "width": '5%'
+                },
+                {
+                    "targets": 4,
+                    "width": '14%'
+                },
+                {
+                    "targets": 5,
+                    "width": '14%'
+                },
+                {
+                    "targets": 6,
+                    "width": '5%'
+                },
+            ]
+        });
     	}, 
     	'getHouseholdComments' : function() {
     		commentsHelper.functions.showCommentsAjaxLoader(
@@ -388,7 +387,6 @@ window.ministeringHelper = function () {
             .addClass(householdData.ministeredByStatus);
 
         _.each(householdData.ministered_by.comments, function(comment){
-            console.log(comment);
             assignmentComments.push(comment);
         });
     

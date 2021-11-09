@@ -18,7 +18,7 @@
             &nbsp;
         @endif
     </td> --}}
-    <td class="assignedStatus">
+    <td class="assignedStatus" data-order="{{ $household->ministeredByStatus == "N/A" ? '1' : $household->ministeredByStatus}}">
         <div class="d-flex">
             @if(!is_null($household->ministeredBy))
                 @if($household->ministeredByStatus === 'approved')
