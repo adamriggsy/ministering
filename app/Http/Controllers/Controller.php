@@ -34,13 +34,4 @@ class Controller extends BaseController
     		->with('user', Auth::user())
     		->with('households', Households::getHouseholds()->get());
     }
-
-    public function removeCompanionshipsNoAssignments(Request $request) {
-        $wanted = Companionships::doesntHave('assignments')->get();
-
-        foreach($wanted as $companionship) {
-            $companionship->delete();
-        }
-        dd('Unused companionships removed');
-    }
 }
