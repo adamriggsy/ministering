@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Http\DataUploader;
 use App\Models\Households;
+use App\Models\Companionships;
 use Auth;
 
 class Controller extends BaseController
@@ -32,5 +33,14 @@ class Controller extends BaseController
     	return view('welcome')
     		->with('user', Auth::user())
     		->with('households', Households::getHouseholds()->get());
+    }
+
+    public function removeCompanionshipsNoAssignments(Request $request) {
+        $wanted = Companionships::doesntHave('assignments')->get();
+
+        foreach($wanted as $companionship) {
+            $companionship->delete();
+        }
+        dd('Unused companionships removed');
     }
 }

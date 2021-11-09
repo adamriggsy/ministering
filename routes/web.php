@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/', [Controller::class, 'wardList'])->name('ward-list');
 	Route::get('/manage-assignments', [AssignmentController::class, 'manageAssignments'])->name('manage-assignments');
 	Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
+	Route::get('/remove-companionships', [Controller::class, 'removeCompanionshipsNoAssignments'])->name('removeCompanionships');
 	
 
 	Route::get('/upload-list', function () {
