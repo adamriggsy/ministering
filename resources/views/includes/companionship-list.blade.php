@@ -17,6 +17,7 @@
                 @else
                     <i class="status-circle bi bi-dash-circle-fill text-black-50"></i>
                 @endif
+                
                 <p>
                     {{ $assignment->household()->fullHouseholdName }}
                     <i class="removeAssigned bi-x-circle small text-danger"></i>
@@ -25,7 +26,9 @@
         @endforeach
     </td>
     <td>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#assignmentManagementModal">Manage Assignments</button>
+        @if($user->canManage)
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#assignmentManagementModal">Manage Assignments</button>
+        @endif
     </td>
     {{--
     <td class="assignedStatus" data-order="{{ $household->ministeredByStatus == "N/A" ? '1' : $household->ministeredByStatus}}">

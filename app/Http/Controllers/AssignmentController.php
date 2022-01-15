@@ -26,7 +26,8 @@ class AssignmentController extends BaseController
 
     public function manageAssignments(Request $request) {
         return view('manageAssignments')
-            ->with('companionships', Companionships::all());
+            ->with('companionships', Companionships::all())
+            ->with('user', Auth::user());
     }
 
     public function assign(Request $request) {
