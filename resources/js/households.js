@@ -64,15 +64,13 @@ window.householdsHelper = function () {
     };
 
     var functions = {
-    	'init' : function(household, householdSearch) {
+    	'init' : function(householdSearch) {
     		$.ajaxSetup({
 			    headers: {
 			        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			    }
 			});
 
-            // functions.setDataAttr('households', household);
-            data.households[household.id] = household;
             functions.setDataAttr('householdSearch', householdSearch);
             functions.setDataAttr('maxCommentsShown', $(css.mainContainer).data('maxcommentsshown'));
             functions.setAutocomplete();

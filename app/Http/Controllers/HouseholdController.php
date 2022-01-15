@@ -17,7 +17,6 @@ class HouseholdController extends BaseController
     const IGNORE_STATUSES = ['moved'];
 
     public function allHouseholds() {
-        $household = Households::first();
         $householdSearch = [];
         Households::getHouseholds(true)->get()->each(function($item, $key) use (&$householdSearch) {
             if(!in_array($item->status, self::IGNORE_STATUSES)) {
@@ -30,7 +29,6 @@ class HouseholdController extends BaseController
 
         return view('list-households')
             ->with('commentMax', 3)
-            ->with('household', $household)
             ->with('householdSearch', $householdSearch);
     }
 
