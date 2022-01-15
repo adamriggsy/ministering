@@ -1,3 +1,232 @@
-.btn-group button.fake-last{border-bottom-right-radius:4px!important;border-top-right-radius:4px!important}.btn-group button.fake-first{border-bottom-left-radius:4px!important;border-top-left-radius:4px!important}h1{margin-bottom:20px;text-align:center}#pageHeader{display:flex;justify-content:space-between}#pageHeader #filterAssignmentsContainer{display:block;margin-top:10px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}#pageHeader #filterAssignmentsContainer ul li:hover{background-color:#b5b5b5;color:#000;cursor:pointer}#pageHeader #viewChoiceContainer{display:block;margin-top:10px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}#pageHeader #viewChoiceContainer ul li:hover{background-color:#b5b5b5;color:#000;cursor:pointer}#assignmentContainer.ajr-grid{display:flex;flex-flow:wrap;justify-content:flex-start}#assignmentContainer.ajr-grid .household{border-bottom:1px solid #b5b5b5;margin-bottom:30px;margin-right:2%;padding-bottom:10px;text-align:center;width:31%}#assignmentContainer.ajr-grid .household .householdName{margin-bottom:0}#assignmentContainer.ajr-grid .household .status{margin-bottom:10px;margin-top:0;text-transform:capitalize}#assignmentContainer.ajr-grid .household.proposed .resetStatus{display:none}#assignmentContainer.ajr-grid .household.approved .householdName,#assignmentContainer.ajr-grid .household.approved .status{color:#38c172}#assignmentContainer.ajr-grid .household.approved .acceptAssignment{display:none}#assignmentContainer.ajr-grid .household.rejected .householdName,#assignmentContainer.ajr-grid .household.rejected .status{color:#e3342f}#assignmentContainer.ajr-grid .household.rejected .rejectAssignment{display:none}#assignmentContainer.ajr-grid .household .assignedContainer{margin-bottom:10px}#assignmentContainer.ajr-grid .household .assignedContainer p{margin-bottom:5px}#assignmentContainer.ajr-grid .household .approvalBtns{margin-bottom:10px}#assignmentContainer.ajr-grid .household .feedbackContainer{margin:10px auto}#assignmentContainer.ajr-grid .household .feedbackContainer .allComments{background:linear-gradient(#fff 30%,hsla(0,0%,100%,0)),linear-gradient(hsla(0,0%,100%,0),#fff 70%) 0 100%,radial-gradient(farthest-side at 50% 0,rgba(0,0,0,.2),transparent),radial-gradient(farthest-side at 50% 100%,rgba(0,0,0,.2),transparent) 0 100%;background-attachment:local,local,scroll,scroll;background-color:#fff;background-repeat:no-repeat;background-size:100% 40px,100% 40px,100% 14px,100% 14px;margin:0 auto;max-height:250px;overflow:auto;width:90%}#assignmentContainer.ajr-grid .household .feedbackContainer .allComments .ministeringComment{margin-bottom:20px}#assignmentContainer.ajr-grid .household .feedbackContainer .allComments .ministeringComment author{font-size:12px;font-style:italic}#assignmentContainer.ajr-grid .household .feedbackContainer .allComments .ministeringComment .commentBody{border-left:6px solid #e7eaf0;margin-top:10px;padding-left:10px}#assignmentContainer.ajr-list{display:flex;flex-flow:wrap;justify-content:flex-start}#assignmentContainer.ajr-list .household{border-bottom:1px solid #b5b5b5;display:flex;margin-bottom:30px;padding-bottom:10px;width:100%}#assignmentContainer.ajr-list .household .householdName{margin-bottom:0}#assignmentContainer.ajr-list .household .status{margin-bottom:10px;margin-top:0;text-transform:capitalize}#assignmentContainer.ajr-list .household.proposed .resetStatus{display:none}#assignmentContainer.ajr-list .household.approved .householdName,#assignmentContainer.ajr-list .household.approved .status{color:#38c172}#assignmentContainer.ajr-list .household.approved .acceptAssignment{display:none}#assignmentContainer.ajr-list .household.rejected .householdName,#assignmentContainer.ajr-list .household.rejected .status{color:#e3342f}#assignmentContainer.ajr-list .household.rejected .rejectAssignment{display:none}#assignmentContainer.ajr-list .household .assignedContainer{margin-bottom:10px}#assignmentContainer.ajr-list .household .assignedContainer p{margin-bottom:5px}#assignmentContainer.ajr-list .household .approvalBtns{margin-bottom:10px}#assignmentContainer.ajr-list .household .infoContainer{display:flex;justify-content:space-between;margin-right:2%;width:51%}#assignmentContainer.ajr-list .household .infoContainer .assignedApprovalContainer{padding-top:40px}#assignmentContainer.ajr-list .household .feedbackContainer{max-width:47%;padding-top:40px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}#assignmentContainer.ajr-list .household .feedbackContainer .allComments{background:linear-gradient(#fff 30%,hsla(0,0%,100%,0)),linear-gradient(hsla(0,0%,100%,0),#fff 70%) 0 100%,radial-gradient(farthest-side at 50% 0,rgba(0,0,0,.2),transparent),radial-gradient(farthest-side at 50% 100%,rgba(0,0,0,.2),transparent) 0 100%;background-attachment:local,local,scroll,scroll;background-color:#fff;background-repeat:no-repeat;background-size:100% 40px,100% 40px,100% 14px,100% 14px;margin:0 0 10px;max-height:250px;overflow:auto}#assignmentContainer.ajr-list .household .feedbackContainer .allComments .ministeringComment{margin-bottom:20px}#assignmentContainer.ajr-list .household .feedbackContainer .allComments .ministeringComment author{font-size:12px;font-style:italic}#assignmentContainer.ajr-list .household .feedbackContainer .allComments .ministeringComment .commentBody{border-left:6px solid #e7eaf0;margin-top:10px;padding-left:10px}@media (max-width:767px){#viewChoiceContainer{display:none}#assignmentContainer.ajr-grid,#assignmentContainer.ajr-list{width:100%}#assignmentContainer.ajr-grid .household,#assignmentContainer.ajr-list .household{flex-direction:column;width:100%}#assignmentContainer.ajr-grid .household .approvalBtns,#assignmentContainer.ajr-list .household .approvalBtns{width:100%}#assignmentContainer.ajr-grid .household .approvalBtns btn,#assignmentContainer.ajr-list .household .approvalBtns btn{padding:.75rem 1rem}#assignmentContainer.ajr-grid .household .infoContainer,#assignmentContainer.ajr-list .household .infoContainer{flex-direction:column;width:100%}#assignmentContainer.ajr-grid .household .infoContainer .assignedApprovalContainer,#assignmentContainer.ajr-list .household .infoContainer .assignedApprovalContainer{padding-top:10px}#assignmentContainer.ajr-grid .household .feedbackContainer,#assignmentContainer.ajr-list .household .feedbackContainer{padding-top:10px;width:100%}}
+.btn-group button.fake-last {
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
 
-/*# sourceMappingURL=approval.css.map*/
+.btn-group button.fake-first {
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#pageHeader {
+  display: flex;
+  justify-content: space-between;
+}
+#pageHeader #filterAssignmentsContainer {
+  margin-top: 10px;
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+#pageHeader #filterAssignmentsContainer ul li:hover {
+  cursor: pointer;
+  background-color: #b5b5b5;
+  color: #000000;
+}
+#pageHeader #viewChoiceContainer {
+  margin-top: 10px;
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+#pageHeader #viewChoiceContainer ul li:hover {
+  cursor: pointer;
+  background-color: #b5b5b5;
+  color: #000000;
+}
+
+#assignmentContainer.ajr-grid {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+}
+#assignmentContainer.ajr-grid .household {
+  border-bottom: 1px solid #b5b5b5;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  width: 31%;
+  margin-right: 2%;
+  text-align: center;
+}
+#assignmentContainer.ajr-grid .household .householdName {
+  margin-bottom: 0;
+}
+#assignmentContainer.ajr-grid .household .status {
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+#assignmentContainer.ajr-grid .household.proposed .resetStatus {
+  display: none;
+}
+#assignmentContainer.ajr-grid .household.approved .householdName, #assignmentContainer.ajr-grid .household.approved .status {
+  color: #38c172;
+}
+#assignmentContainer.ajr-grid .household.approved .acceptAssignment {
+  display: none;
+}
+#assignmentContainer.ajr-grid .household.rejected .householdName, #assignmentContainer.ajr-grid .household.rejected .status {
+  color: #e3342f;
+}
+#assignmentContainer.ajr-grid .household.rejected .rejectAssignment {
+  display: none;
+}
+#assignmentContainer.ajr-grid .household .assignedContainer {
+  margin-bottom: 10px;
+}
+#assignmentContainer.ajr-grid .household .assignedContainer p {
+  margin-bottom: 5px;
+}
+#assignmentContainer.ajr-grid .household .approvalBtns {
+  margin-bottom: 10px;
+}
+#assignmentContainer.ajr-grid .household .feedbackContainer {
+  margin: 10px auto 10px;
+}
+#assignmentContainer.ajr-grid .household .feedbackContainer .allComments {
+  max-height: 250px;
+  overflow: auto;
+  width: 90%;
+  margin: 0 auto;
+  background: linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background: linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll, scroll;
+}
+#assignmentContainer.ajr-grid .household .feedbackContainer .allComments .ministeringComment {
+  margin-bottom: 20px;
+}
+#assignmentContainer.ajr-grid .household .feedbackContainer .allComments .ministeringComment author {
+  font-size: 12px;
+  font-style: italic;
+}
+#assignmentContainer.ajr-grid .household .feedbackContainer .allComments .ministeringComment .commentBody {
+  margin-top: 10px;
+  border-left: 6px solid #E7EAF0;
+  padding-left: 10px;
+}
+#assignmentContainer.ajr-list {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-start;
+}
+#assignmentContainer.ajr-list .household {
+  border-bottom: 1px solid #b5b5b5;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+}
+#assignmentContainer.ajr-list .household .householdName {
+  margin-bottom: 0;
+}
+#assignmentContainer.ajr-list .household .status {
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+#assignmentContainer.ajr-list .household.proposed .resetStatus {
+  display: none;
+}
+#assignmentContainer.ajr-list .household.approved .householdName, #assignmentContainer.ajr-list .household.approved .status {
+  color: #38c172;
+}
+#assignmentContainer.ajr-list .household.approved .acceptAssignment {
+  display: none;
+}
+#assignmentContainer.ajr-list .household.rejected .householdName, #assignmentContainer.ajr-list .household.rejected .status {
+  color: #e3342f;
+}
+#assignmentContainer.ajr-list .household.rejected .rejectAssignment {
+  display: none;
+}
+#assignmentContainer.ajr-list .household .assignedContainer {
+  margin-bottom: 10px;
+}
+#assignmentContainer.ajr-list .household .assignedContainer p {
+  margin-bottom: 5px;
+}
+#assignmentContainer.ajr-list .household .approvalBtns {
+  margin-bottom: 10px;
+}
+#assignmentContainer.ajr-list .household .infoContainer {
+  width: 51%;
+  margin-right: 2%;
+  display: flex;
+  justify-content: space-between;
+}
+#assignmentContainer.ajr-list .household .infoContainer .assignedApprovalContainer {
+  padding-top: 40px;
+}
+#assignmentContainer.ajr-list .household .feedbackContainer {
+  padding-top: 40px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 47%;
+}
+#assignmentContainer.ajr-list .household .feedbackContainer .allComments {
+  margin: 0 0 10px;
+  max-height: 250px;
+  overflow: auto;
+  background: linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background: linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll, scroll;
+}
+#assignmentContainer.ajr-list .household .feedbackContainer .allComments .ministeringComment {
+  margin-bottom: 20px;
+}
+#assignmentContainer.ajr-list .household .feedbackContainer .allComments .ministeringComment author {
+  font-size: 12px;
+  font-style: italic;
+}
+#assignmentContainer.ajr-list .household .feedbackContainer .allComments .ministeringComment .commentBody {
+  margin-top: 10px;
+  border-left: 6px solid #E7EAF0;
+  padding-left: 10px;
+}
+
+@media (max-width: 767px) {
+  #viewChoiceContainer {
+    display: none;
+  }
+
+  #assignmentContainer.ajr-grid, #assignmentContainer.ajr-list {
+    width: 100%;
+  }
+  #assignmentContainer.ajr-grid .household, #assignmentContainer.ajr-list .household {
+    width: 100%;
+    flex-direction: column;
+  }
+  #assignmentContainer.ajr-grid .household .approvalBtns, #assignmentContainer.ajr-list .household .approvalBtns {
+    width: 100%;
+  }
+  #assignmentContainer.ajr-grid .household .approvalBtns btn, #assignmentContainer.ajr-list .household .approvalBtns btn {
+    padding: 0.75rem 1rem;
+  }
+  #assignmentContainer.ajr-grid .household .infoContainer, #assignmentContainer.ajr-list .household .infoContainer {
+    flex-direction: column;
+    width: 100%;
+  }
+  #assignmentContainer.ajr-grid .household .infoContainer .assignedApprovalContainer, #assignmentContainer.ajr-list .household .infoContainer .assignedApprovalContainer {
+    padding-top: 10px;
+  }
+  #assignmentContainer.ajr-grid .household .feedbackContainer, #assignmentContainer.ajr-list .household .feedbackContainer {
+    width: 100%;
+    padding-top: 10px;
+  }
+}

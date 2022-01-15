@@ -5,7 +5,8 @@
 @import '_comment-icon.scss';
 @import '_modal-assignment-feedback.scss';
 
-#companionships {
+#companionships,
+#companionshipsTable {
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
@@ -42,6 +43,29 @@
                 padding-left: 20px;
             }
         }
+    }
+}
+
+#companionshipsTable {
+    .companionship {
+        .assignments {
+            .household {
+                display: flex;
+                align-items: center;
+                padding-left: 0;
+                margin-bottom: 4px;
+
+                .status-circle {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}
+
+#assignedToVisitContainer {
+    .status-circle {
+        display: none;
     }
 }
 

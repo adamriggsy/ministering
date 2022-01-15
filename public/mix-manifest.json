@@ -1,12 +1,12 @@
 {
-    "/js/app.js": "/js/app.js?id=0978e6545bda087705e1",
-    "/js/ministering.js": "/js/ministering.js?id=835d080e9b9a2be3172a",
-    "/js/approval.js": "/js/approval.js?id=5cf9ff45eaf7efd7a87f",
-    "/js/households.js": "/js/households.js?id=731df160313737975f94",
-    "/js/assignment.js": "/js/assignment.js?id=e286f11570f0e8644bc7",
-    "/css/households.css": "/css/households.css?id=ff43b9ab36979458a42d",
-    "/css/manageAssignments.css": "/css/manageAssignments.css?id=4d9eb3514aec35c970b8",
-    "/css/approval.css": "/css/approval.css?id=df0dda4296b0476a51a9",
-    "/css/ministering.css": "/css/ministering.css?id=de5bffe95e184f2d2943",
-    "/css/app.css": "/css/app.css?id=d57bb1c6608b6dbd307a"
+    "/js/app.js": "/js/app.js",
+    "/js/ministering.js": "/js/ministering.js",
+    "/js/approval.js": "/js/approval.js",
+    "/js/households.js": "/js/households.js",
+    "/js/assignment.js": "/js/assignment.js",
+    "/css/households.css": "/css/households.css",
+    "/css/manageAssignments.css": "/css/manageAssignments.css",
+    "/css/approval.css": "/css/approval.css",
+    "/css/ministering.css": "/css/ministering.css",
+    "/css/app.css": "/css/app.css"
 }

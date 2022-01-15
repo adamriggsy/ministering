@@ -15,11 +15,34 @@
             <h1>Manage Companionships</h1>
             {{-- @dd($companionships) --}}
             
+            <div id="companionshipsTable" class="relative d-flex items-top justify-center">
+                <div class="table-responsive" >
+                    <table id="allHouseholdsTable" class="table table-sm table-striped" style="width:100%;"> 
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th data-priority="1">Companion 1</th>
+                                <th data-priority="2">Companion 2</th>
+                                <th data-priority="3">Assigned to Visit</th>
+                                <th data-priority="4"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($companionships as $companionship)
+			                    @include('includes.companionship-list', ['companionship' => $companionship])
+			                @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {{--
             <div id="companionships" class="relative d-flex items-top justify-center">
                 @foreach($companionships as $companionship)
                     @include('includes.companionship', ['companionship' => $companionship])
                 @endforeach
             </div>
+            --}}
         </div>
     </div>
     {{-- <div id="unassignedTicker" class="ticker-wrap">

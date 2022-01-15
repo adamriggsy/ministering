@@ -147,12 +147,13 @@ window.assignmentHelper = function () {
 
                     if(response.success) {
                         let householdHtml = '<p class="household" data-householdid="' + response.assignedHousehold.id + '">' 
+                            + '<i class="status-circle bi bi-dash-circle-fill text-black-50"></i>'
                             + response.assignedHousehold.householdName 
                             + '<i class="removeAssigned bi-x-circle small text-danger"></i>'
                             + '</p>';
                         
                         $(css.activeCompanionship.companionship.minTo).append(householdHtml);
-                        $("#companionships .companionship[data-companionshipid='" + activeCompanionship.id + "'] .assignments").append(householdHtml);
+                        $(".companionship[data-companionshipid='" + activeCompanionship.id + "'] .assignments").append(householdHtml);
 
                         $("#assignHousehold").val('');
                         functions.getUnassignedHouseholds();
