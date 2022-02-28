@@ -180,3 +180,19 @@
         }
     }
 }
+
+#companionshipAddModal {
+    #addCompanionshipInfo {
+        width: 100%;
+
+        p {
+            margin-top: 20px;
+        }
+    }
+
+    #addCompanionship1,
+    #addCompanionship2 {
+        width: 100%;
+        margin: 10px 0 5px;
+    }
+}

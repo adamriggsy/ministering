@@ -11,6 +11,7 @@ mix.js('resources/js/app.js', 'public/js')
 	.js('resources/js/approval.js', 'public/js')
 	.js('resources/js/households.js', 'public/js')
 	.js('resources/js/assignment.js', 'public/js')
+	.js('resources/js/companionship.js', 'public/js')
 	.sass('resources/sass/app.scss', 'public/css',  {
 		sassOptions: {
 			includePaths: ['node_modules'],

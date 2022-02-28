@@ -16,6 +16,28 @@ a {
 	color: $black;
 }
 
+.btn-circle {
+	width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    font-size: 12px;
+    line-height: 1.42857;
+
+    &-xl {
+    	display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    width: 50px;
+	    height: 50px;
+	    border-radius: 35px;
+	    font-size: 32px;
+	    line-height: 1.33;
+	}
+}
+
 .ajax-loader {
 	.lds-default {
 		display: inline-block;

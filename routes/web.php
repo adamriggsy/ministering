@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\HouseholdController;
 use App\Http\Controllers\MinisterToController;
+use App\Http\Controllers\CompanionshipController;
+use App\Http\Controllers\IndividualController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +24,15 @@ use App\Http\Controllers\MinisterToController;
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/', [Controller::class, 'wardList'])->name('ward-list');
-	Route::get('/manage-assignments', [AssignmentController::class, 'manageAssignments'])->name('manage-assignments');
 	Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
 	
+	Route::get('/manage-assignments', [AssignmentController::class, 'manageAssignments'])->name('manage-assignments');
+
+	Route::get('/manage-companionships', [CompanionshipController::class, 'manageCompanionships'])->name('manage-companionships');
+	Route::post('/api/companionship/{id}/delete', [CompanionshipController::class, 'deleteCompanionship']);
+
+	Route::post('/api/createNewCompanionship', [CompanionshipController::class, 'createNew']);
+	Route::get('/api/individuals/unassigned', [IndividualController::class, 'unassigned']);
 
 	Route::get('/upload-list', function () {
 	    return view('upload-list');
